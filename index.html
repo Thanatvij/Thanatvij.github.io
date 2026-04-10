@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanat Vijitrakanlikit — DTI @ Thammasat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f2ee;
+      --ink: #1a1714;
+      --ink-muted: #6b6560;
+      --ink-faint: #b8b2ab;
+      --accent: #c84b2f;
+      --accent-warm: #e8813a;
+      --surface: #eeebe6;
+      --surface-2: #e6e2dc;
+      --border: #d8d3cc;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── Cursor dot ── */
+    .cursor {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, opacity 0.2s;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(200, 75, 47, 0.35);
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), width 0.25s, height 0.25s, opacity 0.2s;
+      transform: translate(-50%, -50%);
+    }
+    body:hover .cursor { opacity: 1; }
+    a:hover ~ .cursor-ring, button:hover ~ .cursor-ring { width: 48px; height: 48px; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(245, 242, 238, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--ink-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: #fff; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 2.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.45;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 860px;
+    }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block; width: 24px; height: 1px;
+      background: var(--accent);
+    }
+    h1.hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    h1.hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 400;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-desc strong { color: var(--ink); font-weight: 500; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      background: var(--ink);
+      color: var(--bg);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+    .btn-ghost {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
+      color: var(--ink-faint); text-transform: uppercase;
+      animation: bobble 2.5s ease-in-out infinite;
+    }
+    .scroll-line { width: 1px; height: 28px; background: var(--ink-faint); }
+    @keyframes bobble { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── Section base ── */
+    section { padding: 6rem 2.5rem; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.75rem;
+    }
+    .section-label span { color: var(--accent); }
+    h2.section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 3rem;
+      color: var(--ink);
+    }
+
+    /* ── About ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1000px;
+    }
+    .about-text p {
+      color: var(--ink-muted);
+      margin-bottom: 1.1rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .about-text p strong { color: var(--ink); }
+    .about-stats {
+      display: flex; flex-direction: column; gap: 1.5rem;
+      padding-top: 0.5rem;
+    }
+    .stat-item { border-left: 2px solid var(--accent); padding-left: 1.2rem; }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--ink);
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Skills ── */
+    #skills { background: var(--bg); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(26,23,20,0.06);
+    }
+    .skill-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .skill-card h3 {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+    }
+
+    /* ── Projects ── */
+    #projects { background: var(--surface); }
+    .projects-list { max-width: 1000px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(26,23,20,0.07);
+    }
+    .project-meta {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+    .project-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+    .project-year {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--ink-faint);
+      letter-spacing: 0.06em;
+    }
+    .project-card h3 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .project-card p {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 1rem;
+    }
+    .project-badge {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      align-self: start;
+    }
+    .project-badge.neutral {
+      background: var(--ink-muted);
+    }
+    .project-badge.gold {
+      background: var(--accent-warm);
+    }
+
+    /* ── Achievements ── */
+    #achievements { background: var(--bg); }
+    .ach-list { max-width: 800px; display: flex; flex-direction: column; gap: 1px; }
+    .ach-item {
+      display: flex; gap: 2rem; align-items: baseline;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .ach-item.visible { opacity: 1; transform: none; }
+    .ach-date {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-faint);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+    .ach-content h4 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .ach-content p {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+    .ach-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+      align-self: flex-start;
+    }
+
+    /* ── Ethics Statement ── */
+    #ethics {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    #ethics .section-label { color: rgba(245,242,238,0.35); }
+    #ethics .section-label span { color: var(--accent-warm); }
+    #ethics h2.section-title { color: var(--bg); }
+    .ethics-quote {
+      max-width: 700px;
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      line-height: 1.65;
+      color: rgba(245,242,238,0.85);
+      border-left: 3px solid var(--accent-warm);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .ethics-points {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      max-width: 900px;
+    }
+    .ethics-point {
+      padding: 1.25rem;
+      border: 1px solid rgba(245,242,238,0.12);
+      border-radius: 4px;
+    }
+    .ethics-point h4 {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-warm);
+      margin-bottom: 0.5rem;
+    }
+    .ethics-point p {
+      font-size: 0.82rem;
+      color: rgba(245,242,238,0.6);
+      line-height: 1.65;
+    }
+
+    /* ── Contact ── */
+    #contact { background: var(--surface); }
+    .contact-inner { max-width: 640px; }
+    .contact-inner p {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .contact-links {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .contact-link {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.1rem;
+      border-radius: 2px;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg);
+      padding: 2rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-faint);
+    }
+
+    /* ── Fade-in observer ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.25rem; }
+      #hero { padding: 6rem 1.25rem 4rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-badge { align-self: start; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Nav -->
+  <nav>
+    <a href="#hero" class="nav-logo">tv<span>.</span>dev</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Awards</a></li>
+      <li><a href="#ethics">Ethics</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Contact →</a>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-tag fade-up">Digital Technology & Innovation · Year 2</div>
+      <h1 class="hero-name fade-up delay-1">
+        Thanat<br/><em>Vijitra&shy;kanlikit</em>
+      </h1>
+      <div class="hero-sub fade-up delay-2">ธนัช วิจิตราการลิขิต</div>
+      <p class="hero-desc fade-up delay-3">
+        นักศึกษาชั้นปีที่ 2 สาขาเทคโนโลยีและนวัตกรรมดิจิทัล (Digital Technology and Innovation)
+        คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์ลำปาง
+        — สนใจด้านการพัฒนาแอปพลิเคชันและ Machine Learning
+        โดยเฉพาะในวงการแพทย์และสาธารณสุข
+      </p>
+      <div class="hero-actions fade-up delay-3">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="https://github.com/Thanatvij" target="_blank" class="btn-ghost">GitHub →</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-label"><span>01</span> — About</div>
+    <h2 class="section-title fade-up">A bit about me</h2>
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <p>
+          สวัสดีครับ ผม <strong>ธนัช วิจิตราการลิขิต</strong> — นักศึกษาชั้นปีที่ 2
+          สาขาเทคโนโลยีและนวัตกรรมดิจิทัล (Digital Technology and Innovation) คณะวิทยาศาสตร์และเทคโนโลยี
+          มหาวิทยาลัยธรรมศาสตร์ ศูนย์ลำปาง
+        </p>
+        <p>
+          ผมสนใจการนำ <strong>Machine Learning</strong> และ <strong>Computer Vision</strong>
+          มาแก้ปัญหาที่มีผลกระทบต่อชีวิตคนจริงๆ โดยเฉพาะในด้านสุขภาพและสาธารณสุข
+          เพราะผมเชื่อว่าเทคโนโลยีควรเข้าถึงได้ ไม่ใช่แค่สำหรับคนที่มีทรัพยากร
+        </p>
+        <p>
+          ตลอด 2 ปีที่ผ่านมา ผมได้พัฒนาโปรเจกต์ตั้งแต่
+          <strong>AI วิเคราะห์โรคในช่องปาก</strong> สำหรับผู้สูงอายุและผู้พิการ,
+          <strong>ระบบ AI ช่วยวินิจฉัยโรคทางเลือด</strong> ผ่านกล้องจุลทรรศน์อัจฉริยะ,
+          ไปจนถึง <strong>แอป AI แนะนำโภชนาการ</strong>
+          ที่เชื่อมข้อมูลทางการแพทย์กับอาหารจริง
+        </p>
+        <p>
+          ผมยังสนใจ Full-Stack Development, AI Orchestration,
+          และการออกแบบระบบที่คนจริงๆ ใช้งานได้ในชีวิตประจำวัน
+        </p>
+      </div>
+      <div class="about-stats fade-up delay-1">
+        <div class="stat-item">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Healthcare AI Projects</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">4</span>
+          <span class="stat-label">National Competitions</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">2nd</span>
+          <span class="stat-label">Year — TU Lampang</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">DTI</span>
+          <span class="stat-label">Digital Technology & Innovation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-label"><span>02</span> — Skills</div>
+    <h2 class="section-title fade-up">Technical Competencies</h2>
+    <div class="skills-grid">
+      <div class="skill-card fade-up">
+        <span class="skill-icon">🤖</span>
+        <h3>Machine Learning & AI</h3>
+        <p style="font-size:0.82rem;color:var(--ink-muted);line-height:1.6;margin-top:0.3rem;">
+          Computer Vision, Object Detection, Real-time inference, AI model deployment
+        </p>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">YOLOv8</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up delay-1">
+        <span class="skill-icon">📱</span>
+        <h3>Mobile & Web Development</h3>
+        <p style="font-size:0.82rem;color:var(--ink-muted);line-height:1.6;margin-top:0.3rem;">
+          Cross-platform apps, responsive interfaces, REST APIs, real-time systems
+        </p>
+        <div class="skill-tags">
+          <span class="tag">React</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">HTML/CSS/JS</span>
+          <span class="tag">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up delay-2">
+        <span class="skill-icon">🏥</span>
+        <h3>Healthcare AI</h3>
+        <p style="font-size:0.82rem;color:var(--ink-muted);line-height:1.6;margin-top:0.3rem;">
+          Medical image analysis, clinical decision support, accessible health tools
+        </p>
+        <div class="skill-tags">
+          <span class="tag">Medical Imaging</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Health APIs</span>
+          <span class="tag">PDPA-aware design</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <span class="skill-icon">⚙️</span>
+        <h3>Data & Backend</h3>
+        <p style="font-size:0.82rem;color:var(--ink-muted);line-height:1.6;margin-top:0.3rem;">
+          Database design, data pipelines, API development, cloud deployment
+        </p>
+        <div class="skill-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GCP</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up delay-1">
+        <span class="skill-icon">🎨</span>
+        <h3>Design & Prototyping</h3>
+        <p style="font-size:0.82rem;color:var(--ink-muted);line-height:1.6;margin-top:0.3rem;">
+          UI/UX design, interactive prototypes, data visualization, pitch decks
+        </p>
+        <div class="skill-tags">
+          <span class="tag">Figma</span>
+          <span class="tag">Canva</span>
+          <span class="tag">Framer</span>
+          <span class="tag">D3.js</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up delay-2">
+        <span class="skill-icon">🔗</span>
+        <h3>AI Orchestration</h3>
+        <p style="font-size:0.82rem;color:var(--ink-muted);line-height:1.6;margin-top:0.3rem;">
+          Chaining AI tools, context engineering, building AI-augmented workflows
+        </p>
+        <div class="skill-tags">
+          <span class="tag">Cursor</span>
+          <span class="tag">Claude API</span>
+          <span class="tag">Perplexity</span>
+          <span class="tag">v0</span>
+          <span class="tag">NotebookLM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="section-label"><span>03</span> — Projects</div>
+    <h2 class="section-title fade-up">Selected Work</h2>
+    <div class="projects-list">
+
+      <div class="project-card fade-up">
+        <div>
+          <div class="project-meta">
+            <span class="project-num">01</span>
+            <span class="project-year">2024 – 2025</span>
+          </div>
+          <h3>PakDee — The 27th National Software Contest (NSC 2025)</h3>
+          <p>
+            AI Oral Health Analysis App — แอปพลิเคชันมือถือวิเคราะห์โรคในช่องปากแบบ Real-time สำหรับผู้สูงอายุและผู้พิการ
+            ใช้ Computer Vision ตรวจจับความผิดปกติในช่องปาก พัฒนาในนาม "โปรแกรมเพื่อสุขภาพ คนพิการ และผู้สูงอายุ"
+            ส่งแข่งขัน NSC (National Software Contest) ครั้งที่ 27
+          </p>
+          <div class="skill-tags" style="margin-bottom:0;">
+            <span class="tag">Computer Vision</span>
+            <span class="tag">YOLOv8</span>
+            <span class="tag">Flutter</span>
+            <span class="tag">Healthcare AI</span>
+            <span class="tag">Accessibility</span>
+          </div>
+        </div>
+        <span class="project-badge gold">NSC 2025 — Funded</span>
+      </div>
+
+      <div class="project-card fade-up delay-1">
+        <div>
+          <div class="project-meta">
+            <span class="project-num">02</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>Nutrimatch — CP CUP 2025 National Round</h3>
+          <p>
+            AI Nutritional Prescription App — แอป AI แนะนำโภชนาการที่เชื่อมข้อมูลทางการแพทย์เข้ากับทางเลือกอาหารจริง
+            เพื่อแก้ปัญหา NCD (โรคไม่ติดต่อเรื้อรัง) ที่คิดเป็น 71% ของสาเหตุการเสียชีวิตในไทย
+            — นำเสนอใน CP CUP 2025 (CoreLab, Digital Innovation Track)
+          </p>
+          <div class="skill-tags" style="margin-bottom:0;">
+            <span class="tag">NLP</span>
+            <span class="tag">Nutrition API</span>
+            <span class="tag">React Native</span>
+            <span class="tag">Health Data</span>
+            <span class="tag">NCD</span>
+          </div>
+        </div>
+        <span class="project-badge neutral">CP CUP 2025</span>
+      </div>
+
+      <div class="project-card fade-up">
+        <div>
+          <div class="project-meta">
+            <span class="project-num">03</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3>TDET-Scan — KU MedAI Innovation Challenge 2026</h3>
+          <p>
+            นำเสนอผลงานในนามทีม TDET (Thalassemia, Dengue, Expert, Tracking)
+            ในการแข่งขัน KU MedAI Innovation Challenge 2026 คณะวิทยาศาสตร์ มหาวิทยาลัยเกษตรศาสตร์
+            ประเภท: นวัตกรรมเพื่อการรักษาและระบบช่วยตัดสินใจทางการแพทย์
+            แนวคิด TDET-Scan คือกล้องจุลทรรศน์อัจฉริยะที่ผสาน Deep Learning
+            ประเมินความรุนแรงของโรคทางเลือด (Thalassemia & Dengue) เชิงปริมาณแบบ Real-time
+            ออกแบบให้ทำงาน Offline ไม่พึ่ง Cloud — เหมาะกับโรงพยาบาลชุมชนและคลินิกชนบท
+            Concept stage with Figma prototype
+          </p>
+          <div class="skill-tags" style="margin-bottom:0;">
+            <span class="tag">Medical Imaging</span>
+            <span class="tag">Deep Learning</span>
+            <span class="tag">Edge AI</span>
+            <span class="tag">Figma Prototype</span>
+            <span class="tag">KU MedAI 2026</span>
+          </div>
+        </div>
+        <span class="project-badge gold">KU MedAI 2026</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Personal Projects -->
+  <section id="personal-projects">
+    <div class="section-label"><span>03.1</span> — Personal Projects</div>
+    <h2 class="section-title fade-up">Side Projects & Labs</h2>
+    <div class="projects-list">
+
+      <div class="project-card fade-up">
+        <div>
+          <div class="project-meta">
+            <span class="project-num">P1</span>
+            <span class="project-year">2024</span>
+          </div>
+          <h3>ABYSS — Python/Pygame Action RPG</h3>
+          <p>
+            เกม Action RPG แบบ top-down พัฒนาด้วย Python และ Pygame สำหรับวิชาพื้นฐานการเขียนโปรแกรมสมัยใหม่
+            มีระบบเลือกพลัง (ไฟ/น้ำ), NPC บทสนทนา, ระบบ EXP/Level Up, ศัตรู AI เคลื่อนที่เข้าหาผู้เล่น
+            และ Boss Fight ที่ยิงกระสุน 50 นัดพร้อมกัน — เขียนระบบ collision, sprite animation และ game state ทั้งหมดเอง
+          </p>
+          <div class="skill-tags" style="margin-bottom:0;">
+            <span class="tag">Python</span>
+            <span class="tag">Pygame</span>
+            <span class="tag">OOP</span>
+            <span class="tag">Game Dev</span>
+            <span class="tag">Sprite Animation</span>
+          </div>
+        </div>
+        <a href="https://github.com/Thanatvij/ABYSS" target="_blank" class="project-badge neutral">GitHub →</a>
+      </div>
+
+      <div class="project-card fade-up delay-1">
+        <div>
+          <div class="project-meta">
+            <span class="project-num">P2</span>
+            <span class="project-year">2024</span>
+          </div>
+          <h3>PTT Élan Café — Coffee Shop Website</h3>
+          <p>
+            เว็บไซต์คาเฟ่สไตล์ฝรั่งเศสพัฒนาด้วย HTML, CSS, JavaScript มีระบบ Login/Register,
+            เมนูกาแฟและของหวานแบบ filterable tabs, hero image slideshow, Google Maps integration
+            และ newsletter subscription — ออกแบบ DOM structure และ component ทั้งหมดเอง
+          </p>
+          <div class="skill-tags" style="margin-bottom:0;">
+            <span class="tag">HTML/CSS/JS</span>
+            <span class="tag">Responsive Design</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">DOM Manipulation</span>
+          </div>
+        </div>
+        <a href="https://github.com/Thanatvij/CoffeeShop" target="_blank" class="project-badge neutral">GitHub →</a>
+      </div>
+
+      <div class="project-card fade-up delay-2">
+        <div>
+          <div class="project-meta">
+            <span class="project-num">P3</span>
+            <span class="project-year">2024</span>
+          </div>
+          <h3>keyboardTrans — Keyboard Layout Translator</h3>
+          <p>
+            เครื่องมือแปลง keyboard layout สำหรับผู้ที่พิมพ์ผิด layout
+            เช่น พิมพ์ไทยในโหมดอังกฤษหรือกลับกัน — โปรเจกต์เล็กๆ ที่แก้ปัญหาที่เจอในชีวิตประจำวันจริงๆ
+          </p>
+          <div class="skill-tags" style="margin-bottom:0;">
+            <span class="tag">Python</span>
+            <span class="tag">String Processing</span>
+            <span class="tag">CLI Tool</span>
+          </div>
+        </div>
+        <a href="https://github.com/Thanatvij/keyboardTrans" target="_blank" class="project-badge neutral">GitHub →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements">
+    <div class="section-label"><span>04</span> — Awards & Certs</div>
+    <h2 class="section-title fade-up">Achievements</h2>
+    <div class="ach-list">
+      <div class="ach-item">
+        <span class="ach-date">Aug 2025</span>
+        <div class="ach-dot"></div>
+        <div class="ach-content">
+          <h4>NSC 2025 — ผู้ได้รับทุนสนับสนุนโครงการ PakDee</h4>
+          <p>สำนักงานพัฒนาวิทยาศาสตร์และเทคโนโลยีแห่งชาติ (NSTDA) & สำนักงานการวิจัยแห่งชาติ (NRCT) · การแข่งขันพัฒนาโปรแกรมคอมพิวเตอร์แห่งประเทศไทย ครั้งที่ 27</p>
+        </div>
+      </div>
+      <div class="ach-item">
+        <span class="ach-date">Nov 2025</span>
+        <div class="ach-dot"></div>
+        <div class="ach-content">
+          <h4>CP CUP 2025 — Certificate of Appreciation</h4>
+          <p>Charoen Pokphand Group · CoreLab, Digital Innovation Track · National Round</p>
+        </div>
+      </div>
+      <div class="ach-item">
+        <span class="ach-date">Mar 2026</span>
+        <div class="ach-dot"></div>
+        <div class="ach-content">
+          <h4>KU MedAI Innovation Challenge 2026 — Participant</h4>
+          <p>มหาวิทยาลัยเกษตรศาสตร์ · คณะวิทยาศาสตร์ · ทีม TDET ·
+          ประเภท: นวัตกรรมเพื่อการรักษาและระบบช่วยตัดสินใจทางการแพทย์</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ethics -->
+  <section id="ethics">
+    <div class="section-label"><span>05</span> — Ethics Statement</div>
+    <h2 class="section-title fade-up">My Commitment to Responsible AI</h2>
+    <blockquote class="ethics-quote fade-up delay-1">
+      "เทคโนโลยีที่ดีที่สุดคือเทคโนโลยีที่ทำให้คนที่เข้าไม่ถึงทรัพยากร
+      สามารถเข้าถึงมันได้ — ไม่ใช่แค่ทำให้คนที่มีอยู่แล้วสะดวกขึ้นเท่านั้น"
+    </blockquote>
+    <div class="ethics-points fade-up delay-2">
+      <div class="ethics-point">
+        <h4>Accessibility First</h4>
+        <p>ผมออกแบบระบบโดยคำนึงถึงผู้ใช้ที่หลากหลาย โดยเฉพาะผู้สูงอายุ ผู้พิการ และชุมชนที่ขาดแคลนทรัพยากรทางการแพทย์</p>
+      </div>
+      <div class="ethics-point">
+        <h4>Transparency & Disclosure</h4>
+        <p>ผมเชื่อใน AI transparency — ทุกระบบที่สร้างต้องสามารถอธิบายได้ว่าทำงานอย่างไร และต้องระบุ human contribution อย่างชัดเจน</p>
+      </div>
+      <div class="ethics-point">
+        <h4>Privacy by Design</h4>
+        <p>ข้อมูลสุขภาพเป็นสิ่งที่ละเอียดอ่อนที่สุด ผมออกแบบระบบโดยคำนึงถึง PDPA และหลักการ privacy by design ตั้งแต่ต้น</p>
+      </div>
+      <div class="ethics-point">
+        <h4>Human-in-the-Loop</h4>
+        <p>AI ในวงการแพทย์ควรช่วยแพทย์ ไม่ใช่แทนที่ ผมสร้างระบบที่มนุษย์ยังคงเป็นจุดตัดสินใจสุดท้ายเสมอ</p>
+      </div>
+      <div class="ethics-point">
+        <h4>Fairness & Inclusion</h4>
+        <p>ผมตรวจสอบ bias ในโมเดล ML อย่างสม่ำเสมอ เพื่อให้แน่ใจว่าระบบที่สร้างไม่สร้างความเหลื่อมล้ำเพิ่มเติม</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-label"><span>06</span> — Contact</div>
+    <h2 class="section-title fade-up">Let's Connect</h2>
+    <div class="contact-inner fade-up delay-1">
+      <p>
+        ผมสนใจโอกาสในด้าน Healthcare AI, Research Collaboration, และ Internship
+        ในสายงาน AI/ML Engineering — รวมถึง Open Source contributions
+        ที่มีผลกระทบต่อสุขภาพสาธารณะ
+      </p>
+      <div class="contact-links">
+        <a href="https://github.com/Thanatvij" target="_blank" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/thanat34423" target="_blank" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:thanat34423@gmail.com" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+        <a href="https://thanatvij.github.io/resume.pdf"target="_blank" class="contact-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Resume (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>Thanat Vijitrakanlikit · Digital Technology and Innovation, Faculty of Science and Technology, Thammasat University</span>
+    <span>Built with HTML · Hosted on GitHub Pages</span>
+  </footer>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    });
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Intersection Observer for fade-up
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up, .ach-item').forEach(el => observer.observe(el));
+
+    // Stagger hero on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('#hero .fade-up').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), 120 * i);
+      });
+    });
+  </script>
+</body>
+</html>
