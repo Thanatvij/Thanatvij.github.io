@@ -533,6 +533,51 @@
       .project-badge { align-self: start; }
       footer { flex-direction: column; gap: 0.75rem; text-align: center; }
     }
+
+    /* ── Tarot Demo Embed ── */
+    .tarot-demo-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .tarot-demo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .tarot-demo-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .tarot-demo-open {
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .tarot-demo-open:hover { opacity: 0.7; }
+    .tarot-demo-frame {
+      position: relative;
+      width: 100%;
+      height: 580px;
+      background: #0a0014;
+    }
+    .tarot-demo-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .tarot-demo-frame { height: 440px; }
+    }
   </style>
 </head>
 <body>
@@ -899,6 +944,52 @@
         <a href="https://github.com/Thanatvij/keyboardTrans" target="_blank" class="project-badge neutral">GitHub →</a>
       </div>
 
+      <div class="project-card fade-up delay-1">
+        <div>
+          <div class="project-meta">
+            <span class="project-num">P4</span>
+            <span class="project-year">2025</span>
+          </div>
+          <h3>พยากรณ์แห่งดวงดาว — Tarot Web App</h3>
+          <p>
+            เว็บดูดวงไพ่ทาโรต์ภาษาไทย พัฒนาด้วย Vanilla JS, Tailwind CSS และ HTML5 Canvas
+            มีระบบพัดไพ่ 78 ใบแบบ CSS transform-origin responsive ทุก device,
+            ระบบตรวจจับคำถามเชิงช่วงเวลาเพื่อปรับ spread อัตโนมัติ,
+            ไพ่กลับหัว (Reversed Cards) ที่เปลี่ยนความหมาย,
+            หน้าสารานุกรมไพ่ทาโรต์ 78 ใบพร้อม modal และ lazy loading
+            — ออกแบบ geometry และ physics ของพัดไพ่ทั้งหมดจากศูนย์
+          </p>
+          <div class="skill-tags" style="margin-bottom:0;">
+            <span class="tag">Vanilla JS</span>
+            <span class="tag">HTML5 Canvas</span>
+            <span class="tag">CSS Animation</span>
+            <span class="tag">Responsive Design</span>
+            <span class="tag">Tailwind CSS</span>
+            <span class="tag">Web API</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+          <a href="https://thanatvij.github.io/tarot/" target="_blank" class="project-badge gold">Live Demo →</a>
+          <a href="https://github.com/Thanatvij/tarot" target="_blank" class="project-badge neutral">GitHub →</a>
+        </div>
+      </div>
+
+      <!-- Tarot Demo Embed -->
+      <div class="tarot-demo-wrap fade-up delay-2">
+        <div class="tarot-demo-header">
+          <span class="tarot-demo-label">▶ ลองเล่นได้เลย — พยากรณ์แห่งดวงดาว</span>
+          <a href="https://thanatvij.github.io/tarot/" target="_blank" class="tarot-demo-open">Open Full ↗</a>
+        </div>
+        <div class="tarot-demo-frame">
+          <iframe
+            src="https://thanatvij.github.io/tarot/"
+            title="พยากรณ์แห่งดวงดาว — Tarot Web App"
+            loading="lazy"
+            allow="vibrate"
+          ></iframe>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -985,7 +1076,6 @@
           </a>
         </div>
       </div>
-
     </div>
   </section>
 
