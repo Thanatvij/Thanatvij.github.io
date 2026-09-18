@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0014">
+<meta name="color-scheme" content="dark">
+<title>พยากรณ์แห่งดวงดาว · ดูดวงไพ่ทาโรต์</title>
+<script>if (window.self !== window.top) document.documentElement.classList.add('embedded');</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Noto+Serif+Thai:wght@400;500;600;700&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS for responsive utilities -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'tarot-gold': '#d4af37',
+          'tarot-gold-bright': '#ffd700',
+          'tarot-cream': '#f5e6d3',
+        }
+      }
+    }
+  }
+</script>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="ดูดวงไพ่ทาโรต์ออนไลน์ภาษาไทย พยากรณ์แห่งดวงดาว เปิดไพ่ 78 ใบ ดูดวงความรัก การงาน การเงิน การเรียน">
+<meta name="keywords" content="ดูดวงไพ่ทาโรต์, tarot ภาษาไทย, ดูดวงออนไลน์, พยากรณ์ดวง, ไพ่ทาโรต์, tarot online">
+<meta name="author" content="Thanat Vijitrakanlikit">
+<meta property="og:title" content="พยากรณ์แห่งดวงดาว · ดูดวงไพ่ทาโรต์">
+<meta property="og:description" content="ดูดวงไพ่ทาโรต์ออนไลน์ภาษาไทย เปิดไพ่ 3 ใบ พยากรณ์ความรัก การงาน การเงิน">
+<meta property="og:url" content="https://thanatvij.github.io/tarot/">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4WPJ98PTW1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4WPJ98PTW1');
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="starfield" id="starfield"></div>
+<div class="mist"></div>
+<svg class="moon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8d5" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d4af37" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <path d="M 50 10 A 40 40 0 1 0 50 90 A 32 32 0 1 1 50 10 Z"
+        fill="url(#moonGlow)" stroke="#d4af37" stroke-width="0.5"/>
+</svg>
+
+<div class="container">
+
+  <section class="section landing active" id="section-landing">
+    <div class="px-4 md:px-8">
+      <h2 class="title-main">DIVINATION OF THE STARS</h2>
+      <h1 class="title-thai">พยากรณ์แห่งดวงดาว</h1>
+      <div class="divider-ornate"><span class="divider-ornate-symbol">✦</span></div>
+      <p class="subtitle">
+        เปิดประตูสู่จักรวาล สัมผัสชะตากรรมที่จารึกไว้ด้วยไพ่ยิปซีโบราณ
+        <br class="hidden sm:inline">ปล่อยให้พลังจากดวงดาวนำทางให้คุณค้นพบคำตอบที่ซ่อนอยู่ในจิตใต้สำนึก
+      </p>
+
+      <!-- Widget 1: Card of the Day -->
+      <div class="widget-card-day" id="widgetCardDay" style="display:none;">
+        <div class="widget-card-day-label" id="cardDayLabel">ไพ่แห่งวันที่ --/--/----</div>
+        <div class="widget-card-day-content">
+          <img class="widget-card-day-img" id="cardDayImg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Card of the Day">
+          <div class="widget-card-day-names">
+            <div class="widget-card-day-name-th" id="cardDayNameTh">-</div>
+            <div class="widget-card-day-name-en" id="cardDayNameEn">-</div>
+          </div>
+        </div>
+        <button class="widget-card-day-toggle" id="cardDayToggle" onclick="toggleCardDayMeaning()">
+          ดูความหมาย
+        </button>
+        <div class="widget-card-day-meaning" id="cardDayMeaning"></div>
+      </div>
+
+      <!-- Widget 2: Zodiac Card Button -->
+      <div class="widget-zodiac-btn">
+        <button class="btn-zodiac" onclick="openZodiacModal()">ค้นหาไพ่ประจำราศีของคุณ</button>
+      </div>
+    </div>
+    <div class="center-btn">
+      <button class="btn-primary w-full sm:w-auto px-8 md:px-16" onclick="goToCategory()">เริ่มเปิดไพ่</button>
+    </div>
+  </section>
+
+  <section class="section" id="section-category">
+    <div class="px-4 md:px-8">
+      <h2 class="section-title">เลือกประเด็นที่ต้องการพยากรณ์</h2>
+      <p class="section-subtitle">น้อมจิต กำหนดคำถามในใจ แล้วเลือกหมวดที่สอดคล้องกับชะตา</p>
+    </div>
+
+    <div class="category-grid gap-3 sm:gap-4 px-4 sm:px-8" id="categoryGrid">
+      <div class="category-card flex-1 min-w-[120px] sm:min-w-[140px]" role="button" tabindex="0" data-category="love">
+        <span class="category-emoji">💕</span>
+        <div class="category-name">ความรัก</div>
+      </div>
+      <div class="category-card flex-1 min-w-[120px] sm:min-w-[140px]" role="button" tabindex="0" data-category="study">
+        <span class="category-emoji">📚</span>
+        <div class="category-name">การเรียน</div>
+      </div>
+      <div class="category-card flex-1 min-w-[120px] sm:min-w-[140px]" role="button" tabindex="0" data-category="work">
+        <span class="category-emoji">💼</span>
+        <div class="category-name">การทำงาน</div>
+      </div>
+      <div class="category-card flex-1 min-w-[120px] sm:min-w-[140px]" role="button" tabindex="0" data-category="money">
+        <span class="category-emoji">💰</span>
+        <div class="category-name">การเงิน</div>
+      </div>
+      <div class="category-card flex-1 min-w-[120px] sm:min-w-[140px]" role="button" tabindex="0" data-category="general">
+        <span class="category-emoji">🌟</span>
+        <div class="category-name">ดวงชะตาภาพรวม</div>
+      </div>
+    </div>
+
+    <div class="question-input-wrap px-4 md:px-8">
+      <label class="question-label">หากต้องการ ระบุคำถามเพิ่มเติม (ไม่จำเป็น)</label>
+      <textarea class="question-input" id="questionInput"
+                placeholder="เช่น ความสัมพันธ์กับคนที่กำลังคุยอยู่จะเป็นอย่างไร..."
+                maxlength="200"></textarea>
+    </div>
+
+    <div class="center-btn">
+      <button class="btn-primary w-full sm:w-auto px-8 md:px-16" id="btnStartDraw" onclick="goToShuffle()" disabled>เปิดไพ่</button>
+    </div>
+  </section>
+
+  <!-- Shuffle Section -->
+  <section class="section" id="section-shuffle">
+    <div class="shuffle-container">
+      <div class="shuffle-particles" id="shuffleParticles"></div>
+      <div class="shuffle-deck" id="shuffleDeck"></div>
+      <div class="shuffle-text">
+        <h2 class="shuffle-title">กำลังสับไพ่...</h2>
+        <p class="shuffle-subtitle">จงน้อมจิตสงบ และมุ่งมั่นกับคำถามของคุณ</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Draw Section: กางพัด + ปุ่มตัดไพ่ -->
+  <section class="section" id="section-draw">
+
+    <!-- Draw Status: แสดงตอนเปิดไพ่จริง -->
+    <div class="draw-status px-4 md:px-8" id="drawStatus" style="display:none;">
+      <div class="draw-position" id="drawPosition">🔮 ใบที่ 1: เจ้าชะตา</div>
+      <div class="draw-position-desc" id="drawDesc">ตัวคุณ บุคลิก พลังงานในตัว</div>
+      <div class="draw-progress" id="drawProgress">
+        <div class="progress-dot active"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+      </div>
+    </div>
+
+    <!-- Cut Button Section: ปุ่มตัดไพ่ (วางระหว่าง status กับพัด) -->
+    <div class="cut-button-section" id="cutButtonWrap">
+      <button class="btn-cut-deck" id="btnCutDeck" onclick="startCutAnimation()">
+        ✦ ตัดไพ่
+      </button>
+      <p class="cut-button-subtitle">เลือกตัดไพ่หากต้องการส่งพลังเข้าสู่สำรับ</p>
+    </div>
+
+    <!-- Fan Container: ที่กางไพ่ -->
+    <div class="fan-container" id="fanContainer">
+      <div class="fan-wrap" id="fanWrap"></div>
+
+      <!-- Cut Overlay: ใช้ตอน animation ตัดไพ่ -->
+      <div class="cut-overlay" id="cutOverlay">
+        <div class="cut-header">
+          <h3 class="cut-title">ตัดไพ่</h3>
+          <p class="cut-subtitle">ส่งพลังของคุณเข้าสู่สำรับไพ่</p>
+        </div>
+        <div class="cut-stack" id="cutStack"></div>
+        <div class="cut-pile cut-pile-top" id="cutPileTop" onclick="selectPile('top')">
+          <div class="cut-pile-cards" id="cutPileTopCards"></div>
+
+        </div>
+        <div class="cut-pile cut-pile-bottom" id="cutPileBottom" onclick="selectPile('bottom')">
+          <div class="cut-pile-cards" id="cutPileBottomCards"></div>
+
+        </div>
+        <div class="cut-instruction" id="cutInstruction">เลือกกองที่จะวางไว้บน</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section result-section" id="section-result">
+    <div class="px-4 md:px-8">
+      <h2 class="section-title">คำพยากรณ์จากจักรวาล</h2>
+      <p class="section-subtitle" id="resultSubtitle"></p>
+    </div>
+
+    <div class="selected-cards px-4 md:px-8" id="selectedCardsDisplay"></div>
+
+    <div class="px-4 md:px-8" id="readingsContainer"></div>
+
+    <div class="action-row px-4 md:px-8">
+      <button class="btn-secondary w-full sm:w-auto px-8 md:px-16" id="btnShare">บันทึกและแชร์</button>
+      <button class="btn-secondary w-full sm:w-auto px-8 md:px-16" onclick="resetAll()">เปิดไพ่ใหม่</button>
+    </div>
+  </section>
+
+<footer class="footer">
+  <div class="px-4 md:px-8">
+    <p class="footer-text text-sm md:text-base">
+      <span class="footer-ornate">✦</span>
+      หากต้องการดูดวงเชิงลึกเพิ่มเติม ติดต่อได้ที่
+      <span class="footer-ornate">✦</span>
+    </p>
+    <a class="footer-ig" href="https://instagram.com/thanxt.v" target="_blank" rel="noopener">
+      📷 Instagram: @thanxt.v
+    </a>
+    <a class="footer-ig" href="https://thanatvij.github.io" target="_blank" rel="noopener" style="margin-top: 10px;">
+      🌐 ดูผลงานอื่นๆ ได้ที่ thanatvij.github.io
+    </a>
+    <a class="footer-ig" href="tarot-guide.html" style="margin-top: 15px;">
+      📖 สารานุกรมไพ่ทาโรต์
+    </a>
+    <p class="footer-credit">
+      รูปไพ่จาก Rider-Waite-Smith Tarot Deck (1909, Public Domain) · ภาพโดย Pamela Colman Smith
+    </p>
+  </div>
+</footer>
+
+</div>
+
+<!-- Zodiac Modal -->
+<div class="zodiac-modal" id="zodiacModal">
+  <div class="zodiac-modal-content">
+    <button class="zodiac-modal-close" onclick="closeZodiacModal()">&times;</button>
+    <div class="zodiac-modal-inner">
+      <!-- Zodiac Grid View -->
+      <div class="zodiac-grid-view" id="zodiacGridView">
+        <h3 class="zodiac-modal-title">ราศีของคุณคือ?</h3>
+        <div class="zodiac-grid" id="zodiacGrid"></div>
+      </div>
+      <!-- Zodiac Result View -->
+      <div class="zodiac-result-view" id="zodiacResultView" style="display:none;">
+        <img class="zodiac-result-img" id="zodiacResultImg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Zodiac Card">
+        <div class="zodiac-result-name-th" id="zodiacResultNameTh"></div>
+        <div class="zodiac-result-name-en" id="zodiacResultNameEn"></div>
+        <div class="zodiac-result-meaning" id="zodiacResultMeaning"></div>
+        <button class="zodiac-result-back" onclick="backToZodiacGrid()">เปลี่ยนราศี</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+  // A11y: ให้กด Enter/Space เลือกหมวดได้ด้วยคีย์บอร์ด
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('category-card')) {
+      e.preventDefault();
+      e.target.click();
+    }
+  });
+</script>
+</body>
+</html>

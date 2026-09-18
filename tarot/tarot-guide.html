@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARCANA · ศาสตร์แห่งไพ่ทาโรต์</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Noto+Serif+Thai:wght@400;500;600;700&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS for responsive utilities -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'tarot-gold': '#d4af37',
+          'tarot-gold-bright': '#ffd700',
+          'tarot-cream': '#f5e6d3',
+        }
+      }
+    }
+  }
+</script>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="สารานุกรมไพ่ทาโรต์ภาษาไทย ครบ 78 ใบ Major Arcana Minor Arcana ประวัติไพ่ทาโรต์ วิธีอ่านไพ่">
+<meta name="keywords" content="สารานุกรมไพ่ทาโรต์, ความหมายไพ่ทาโรต์, Major Arcana, Minor Arcana, ไพ่ทาโรต์ภาษาไทย">
+<meta name="author" content="Thanat Vijitrakanlikit">
+<meta property="og:title" content="สารานุกรมไพ่ทาโรต์ · พยากรณ์แห่งดวงดาว">
+<meta property="og:description" content="ศาสตร์แห่งไพ่ทาโรต์ครบ 78 ใบ พร้อมประวัติและวิธีอ่านไพ่">
+<meta property="og:url" content="https://thanatvij.github.io/tarot/tarot-guide.html">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4WPJ98PTW1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4WPJ98PTW1');
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="guide-page">
+
+<!-- Background Effects -->
+<div class="starfield" id="starfield"></div>
+<div class="mist"></div>
+<svg class="moon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8d5" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d4af37" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <path d="M 50 10 A 40 40 0 1 0 50 90 A 32 32 0 1 1 50 10 Z"
+      fill="url(#moonGlow)" stroke="#d4af37" stroke-width="0.5"/>
+</svg>
+
+<!-- Sticky Navigation -->
+<nav class="guide-nav" id="guideNav">
+  <div class="nav-container">
+    <a href="index.html" class="nav-back">
+      <span>←</span> กลับ
+    </a>
+    <div class="nav-links">
+      <a href="#history" class="nav-link">ประวัติ</a>
+      <a href="#cards" class="nav-link">ไพ่ทั้งหมด</a>
+      <a href="#reading" class="nav-link">วิธีอ่าน</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="guide-container">
+
+  <!-- Hero Section -->
+  <section class="guide-hero">
+    <h1 class="hero-title">ARCANA</h1>
+    <h2 class="hero-subtitle">ศาสตร์แห่งไพ่ทาโรต์</h2>
+    <div class="divider-ornate"><span class="divider-ornate-symbol">✦</span></div>
+    <p class="hero-description">
+      เปิดโลกแห่งปริศนาแห่งไพ่ยิปซี
+      <br class="hidden sm:inline">สัมผัสความรู้ที่สืบทอดมาตั้งแต่ศตวรรษที่ 15
+    </p>
+    <a href="#cards" class="btn-primary hero-cta">สำรวจไพ่ 78 ใบ</a>
+  </section>
+
+  <!-- History Section -->
+  <section class="guide-section" id="history">
+    <div class="section-header">
+      <h2 class="section-title">ประวัติแห่งไพ่ทาโรต์</h2>
+      <div class="divider-ornate"><span class="divider-ornate-symbol">✦</span></div>
+    </div>
+
+    <div class="history-content">
+      <div class="history-text">
+        <h3 class="history-era">จุดเริ่มต้นที่อิตาลี</h3>
+        <p class="history-paragraph">
+          ไพ่ทาโรต์เริ่มปรากฏครั้งแรกในยุโรปเหนือของอิตาลีช่วงปี 1430-1450 ในฐานะไพ่เล่นสำหรับความบันเทิง
+          ชื่อ "Tarot" มาจากภาษาอิตาลี "Tarocchi" ซึ่งมีต้นกำเนิดจากไพ่ยิบซีที่ใช้เล่นกันในยุคนั้น
+        </p>
+
+        <h3 class="history-era">การพัฒนาเป็นเครื่องมือทำนาย</h3>
+        <p class="history-paragraph">
+          ในศตวรรษที่ 18 นักมายากลและนักปรัชญาในฝรั่งเศสเริ่มใช้ไพ่ทาโรต์เป็นเครื่องมือทำนายดวง
+          การตีความไพ่ได้พัฒนาขึ้นพร้อมกับลัทธิมิสติกที่เฟื่องฟูในยุคนั้น
+        </p>
+
+        <h3 class="history-era">ผู้เชื่อมโยงสู่จิตวิทยา</h3>
+        <p class="history-paragraph">
+          ศาสตร์แห่งไพ่ทาโรต์ได้รับการยอมรับในวงกว้างเมื่อ <strong>Carl Jung</strong> นักจิตวิทยาชื่อดัง
+          ได้นำเอา Archetypes จากไพ่ทาโรต์มาใช้ในการวิเคราะห์จิตใจมนุษย์
+          ทำให้ไพ่ทาโรต์กลายเป็นเครื่องมือสำคัญในการทำความเข้าใจจิตใต้สำนึก
+        </p>
+
+        <h3 class="history-era">ยุคปัจจุบัน</h3>
+        <p class="history-paragraph">
+          ในปัจจุบัน ไพ่ทาโรต์ไม่ได้เป็นเพียงเครื่องมือทำนาย แต่ยังใช้เป็นสื่อสำหรับการมองตัวเอง (Self-reflection)
+          การนั่งสมาธิ์ และการพัฒนาตนเอง เป็นสะพานเชื่อมระหว่างสติปัญญากับจิตใต้สำนึก
+        </p>
+      </div>
+
+      <div class="history-timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">1430-1450</div>
+          <div class="timeline-event">เกิดขึ้นที่อิตาลี</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1700s</div>
+          <div class="timeline-event">เริ่มใช้ทำนายดวง</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1909</div>
+          <div class="timeline-event">Rider-Waite-Smith Deck</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1900s</div>
+          <div class="timeline-event">Carl Jung นำไปใช้ในจิตวิทยา</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">ปัจจุบัน</div>
+          <div class="timeline-event">เครื่องมือพัฒนาตนเอง</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Cards Section -->
+  <section class="guide-section" id="cards">
+    <div class="section-header">
+      <h2 class="section-title">ไพ่ทั้งหมด</h2>
+      <div class="divider-ornate"><span class="divider-ornate-symbol">✦</span></div>
+    </div>
+
+    <!-- Arcana Tabs -->
+    <div class="arcan-tabs">
+      <button class="arcan-tab active" data-tab="major">Major Arcana</button>
+      <button class="arcan-tab" data-tab="minor">Minor Arcana</button>
+    </div>
+
+    <!-- Major Arcana Grid -->
+    <div class="tab-content active" id="major-content">
+      <div class="cards-grid" id="majorGrid">
+        <!-- Cards will be loaded via JS -->
+      </div>
+    </div>
+
+    <!-- Minor Arcana Grid -->
+    <div class="tab-content" id="minor-content">
+      <!-- Suit Tabs -->
+      <div class="suit-tabs">
+        <button class="suit-tab active" data-suit="wands">🔥 Wands</button>
+        <button class="suit-tab" data-suit="cups">💧 Cups</button>
+        <button class="suit-tab" data-suit="swords">⚔️ Swords</button>
+        <button class="suit-tab" data-suit="pentacles">⭐ Pentacles</button>
+      </div>
+      <div class="cards-grid" id="minorGrid">
+        <!-- Cards will be loaded via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- How to Read Section -->
+  <section class="guide-section" id="reading">
+    <div class="section-header">
+      <h2 class="section-title">วิธีอ่านไพ่</h2>
+      <div class="divider-ornate"><span class="divider-ornate-symbol">✦</span></div>
+    </div>
+
+    <p class="reading-intro">
+      การอ่านไพ่ทาโรต์ไม่ใช่การทำนายที่ล็อกตาย แต่เป็นการสื่อสารระหว่างจิตสำนึกกับจิตใต้สำนึก
+      เลือกวิธีอ่านที่เหมาะกับคำถามของคุณ
+    </p>
+
+    <!-- Spread Selection -->
+    <div class="spread-selector">
+      <button class="spread-btn active" data-spread="single">1 ใบ</button>
+      <button class="spread-btn" data-spread="three">3 ใบ</button>
+      <button class="spread-btn" data-spread="celtic">Celtic Cross</button>
+    </div>
+
+    <!-- Spread Diagrams -->
+    <div class="spread-diagrams">
+      <!-- Single Card Spread -->
+      <div class="spread-diagram active" id="spread-single">
+        <svg viewBox="0 0 300 200" class="spread-svg">
+          <!-- Card -->
+          <g class="spread-card" data-position="single">
+            <rect x="110" y="50" width="80" height="120" rx="4" fill="#2d0052" stroke="#d4af37" stroke-width="2"/>
+            <text x="150" y="115" text-anchor="middle" fill="#d4af37" font-size="24">?</text>
+          </g>
+          <!-- Position Label -->
+          <text x="150" y="190" text-anchor="middle" fill="#f5e6d3" font-size="14">คำตอบของวันนี้</text>
+        </svg>
+        <div class="spread-description">
+          <h4>ไพ่ 1 ใบ - คำตอบรายวัน</h4>
+          <p>เหมาะสำหรับคำถามเชิงให้คำแนะนำ หรือเรื่องราวที่ต้องการคำตอบรวดเร็ว</p>
+        </div>
+      </div>
+
+      <!-- Three Card Spread -->
+      <div class="spread-diagram" id="spread-three">
+        <svg viewBox="0 0 400 200" class="spread-svg">
+          <!-- Past Card -->
+          <g class="spread-card" data-position="past">
+            <rect x="50" y="50" width="70" height="105" rx="4" fill="#2d0052" stroke="#d4af37" stroke-width="2"/>
+            <text x="85" y="107" text-anchor="middle" fill="#d4af37" font-size="20">🌅</text>
+          </g>
+          <!-- Present Card -->
+          <g class="spread-card" data-position="present">
+            <rect x="165" y="50" width="70" height="105" rx="4" fill="#2d0052" stroke="#d4af37" stroke-width="2"/>
+            <text x="200" y="107" text-anchor="middle" fill="#d4af37" font-size="20">🌙</text>
+          </g>
+          <!-- Future Card -->
+          <g class="spread-card" data-position="future">
+            <rect x="280" y="50" width="70" height="105" rx="4" fill="#2d0052" stroke="#d4af37" stroke-width="2"/>
+            <text x="315" y="107" text-anchor="middle" fill="#d4af37" font-size="20">✨</text>
+          </g>
+          <!-- Position Labels -->
+          <text x="85" y="175" text-anchor="middle" fill="#f5e6d3" font-size="12">อดีต</text>
+          <text x="200" y="175" text-anchor="middle" fill="#f5e6d3" font-size="12">ปัจจุบัน</text>
+          <text x="315" y="175" text-anchor="middle" fill="#f5e6d3" font-size="12">อนาคต</text>
+        </svg>
+        <div class="spread-description">
+          <h4>ไพ่ 3 ใบ - อดีต ปัจจุบัน อนาคต</h4>
+          <p>เหมาะสำหรับคำถามเชิงเวลา ดูแนวโลคและเหตุการณ์ที่ผ่านมาถึงอนาคต</p>
+        </div>
+      </div>
+
+      <!-- Celtic Cross Spread -->
+      <div class="spread-diagram" id="spread-celtic">
+        <svg viewBox="0 0 350 250" class="spread-svg">
+          <!-- Center Cross -->
+          <!-- Card 1: Present -->
+          <g class="spread-card" data-position="present-cross">
+            <rect x="135" y="70" width="40" height="60" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="155" y="105" text-anchor="middle" fill="#d4af37" font-size="12">1</text>
+          </g>
+          <!-- Card 2: Challenge -->
+          <g class="spread-card" data-position="challenge">
+            <rect x="135" y="20" width="40" height="60" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="155" y="55" text-anchor="middle" fill="#d4af37" font-size="12">2</text>
+          </g>
+          <!-- Card 3: Past -->
+          <g class="spread-card" data-position="past-cross">
+            <rect x="85" y="70" width="40" height="60" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="105" y="105" text-anchor="middle" fill="#d4af37" font-size="12">3</text>
+          </g>
+          <!-- Card 4: Future -->
+          <g class="spread-card" data-position="future-cross">
+            <rect x="185" y="70" width="40" height="60" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="205" y="105" text-anchor="middle" fill="#d4af37" font-size="12">4</text>
+          </g>
+          <!-- Card 5: Above -->
+          <g class="spread-card" data-position="above">
+            <rect x="135" y="130" width="40" height="60" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="155" y="165" text-anchor="middle" fill="#d4af37" font-size="12">5</text>
+          </g>
+          <!-- Card 6: Below -->
+          <g class="spread-card" data-position="below">
+            <rect x="255" y="70" width="40" height="60" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="275" y="105" text-anchor="middle" fill="#d4af37" font-size="12">6</text>
+          </g>
+          <!-- Staff Cards -->
+          <g class="spread-card" data-position="staff1">
+            <rect x="255" y="140" width="35" height="52" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="272" y="171" text-anchor="middle" fill="#d4af37" font-size="10">7</text>
+          </g>
+          <g class="spread-card" data-position="staff2">
+            <rect x="295" y="140" width="35" height="52" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="312" y="171" text-anchor="middle" fill="#d4af37" font-size="10">8</text>
+          </g>
+          <g class="spread-card" data-position="staff3">
+            <rect x="255" y="195" width="35" height="52" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="272" y="226" text-anchor="middle" fill="#d4af37" font-size="10">9</text>
+          </g>
+          <g class="spread-card" data-position="staff4">
+            <rect x="295" y="195" width="35" height="52" rx="3" fill="#2d0052" stroke="#d4af37" stroke-width="1.5"/>
+            <text x="312" y="226" text-anchor="middle" fill="#d4af37" font-size="10">10</text>
+          </g>
+          <!-- Labels -->
+          <text x="155" y="5" text-anchor="middle" fill="#f5e6d3" font-size="8">สถานการณ์ปัจจุบัน</text>
+          <text x="155" y="260" text-anchor="middle" fill="#f5e6d3" font-size="8">อุปสรรค</text>
+        </svg>
+        <div class="spread-description">
+          <h4>Celtic Cross - การอ่านแบบลึกซึ้ง</h4>
+          <p>เหมาะสำหรับคำถามที่ซับซ้อน ต้องการการวิเคราะห์ละเอียดทุกด้าน</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Position Tooltip -->
+    <div class="position-tooltip" id="positionTooltip">
+      <h5 class="tooltip-title"></h5>
+      <p class="tooltip-text"></p>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="guide-footer">
+  <a href="index.html" class="footer-link">
+    <span class="footer-ornate">✦</span>
+    กลับสู่หน้าดูดวง
+    <span class="footer-ornate">✦</span>
+  </a>
+  <p class="footer-credit">
+    รูปไพ่จาก Rider-Waite-Smith Tarot Deck (1909, Public Domain)
+  </p>
+</footer>
+
+<!-- Card Modal -->
+<div class="card-modal" id="cardModal">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-body">
+      <div class="modal-image">
+        <img id="modalCardImage" src="" alt="" loading="lazy">
+      </div>
+      <div class="modal-info">
+        <div class="modal-header">
+          <h3 class="modal-title-th" id="modalTitleTh"></h3>
+          <h4 class="modal-title-en" id="modalTitleEn"></h4>
+          <div class="modal-symbol" id="modalSymbol"></div>
+        </div>
+        <div class="modal-meanings">
+          <h5 class="meanings-title">ความหมายแยกตามหมวด</h5>
+          <div class="meanings-list" id="modalMeanings"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/guide.js"></script>
+</body>
+</html>
