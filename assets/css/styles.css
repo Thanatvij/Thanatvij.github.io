@@ -654,6 +654,30 @@ a.contact-row:hover { padding-left: .6rem; color: var(--accent); }
   @keyframes vt-in { from { opacity: 0; } }
 }
 
+/* ---------- keyboardTrans widget ---------- */
+.kt { padding: clamp(1.1rem, .8rem + 1.4vw, 2rem); gap: 1.1rem; }
+.kt-grid { display: grid; gap: 1rem; }
+@media (min-width: 800px) { .kt-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; } }
+.kt-pane { display: flex; flex-direction: column; gap: .5rem; min-width: 0; }
+.kt-pane .label { color: var(--muted); }
+.kt textarea, .kt-out { width: 100%; min-height: 9.5rem; padding: .9rem 1rem; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; font-size: 1.05rem; line-height: 1.7; }
+.kt textarea { resize: vertical; }
+.kt textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-color: var(--accent); }
+.kt-out { display: block; background: var(--surface-2); white-space: pre-wrap; overflow-wrap: anywhere; user-select: all; }
+.kt-out.is-empty::before { content: attr(data-placeholder); color: var(--muted); user-select: none; }
+.kt-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem .75rem; }
+.kt-bar .btn[disabled] { opacity: .5; cursor: not-allowed; }
+.kt-live { display: inline-flex; align-items: center; gap: .5rem; margin-left: auto; font-size: var(--fs-small); color: var(--ink-2); cursor: pointer; min-height: 36px; }
+.kt-live input { width: 1.05rem; height: 1.05rem; accent-color: var(--accent); }
+.kt-mode { color: var(--accent); text-transform: none; letter-spacing: .03em; margin: 0; }
+.kt-mode:empty { display: none; }
+.kt-status { font-size: var(--fs-small); color: var(--ok); }
+.kt-examples { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.kt-examples .label { color: var(--muted); margin-right: .25rem; }
+.kt-chip { padding: .3rem .8rem; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--ink); font-family: var(--font-mono); font-size: .8rem; cursor: pointer; min-height: 36px; transition: border-color var(--t-fast), background var(--t-fast); }
+.kt-chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+.kt-note { color: var(--muted); font-size: var(--fs-small); margin: 0; max-width: 70ch; }
+
 /* ---------- Lenis (from lenis.css; the iframe rule is left out so embedded demos stay interactive) ---------- */
 html.lenis, html.lenis body { height: auto; }
 .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }

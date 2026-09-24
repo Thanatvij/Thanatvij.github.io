@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Personal Projects — Thanat Vijitrakanlikit</title>
-<meta name="description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub และ Tarot Web App ที่ลองใช้ได้จริง, ABYSS, PTT Élan Café และ keyboardTrans">
+<meta name="description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub และ keyboardTrans ที่ลองใช้ได้จริง, Tarot Web App, ABYSS และ PTT Élan Café">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f5f3ee">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Thanat Vijitrakanlikit">
 <meta property="og:title" content="Personal Projects — Thanat Vijitrakanlikit">
-<meta property="og:description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub และ Tarot Web App ที่ลองใช้ได้จริง, ABYSS, PTT Élan Café และ keyboardTrans">
+<meta property="og:description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub และ keyboardTrans ที่ลองใช้ได้จริง, Tarot Web App, ABYSS และ PTT Élan Café">
 <meta property="og:url" content="https://thanatvij.github.io/personal-projects/">
 <meta property="og:image" content="https://thanatvij.github.io/assets/img/og-cover.jpg">
 <meta property="og:image:width" content="1200">
@@ -94,34 +94,44 @@
     </div>
   </section>
 
-  <section class="section section--tint" id="tarot" aria-labelledby="tarot-title">
+  <section class="section section--tint" id="keyboardtrans" aria-labelledby="kt-title">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
-          <p class="eyebrow">Live product</p>
-          <h2 class="h2" id="tarot-title"><span class="th">พยากรณ์แห่งดวงดาว</span></h2>
+          <p class="eyebrow">Live tool</p>
+          <h2 class="h2" id="kt-title">keyboardTrans</h2>
         </div>
-        <p class="lead">เว็บดูดวงไพ่ทาโรต์ภาษาไทยที่มีไพ่ครบ 78 ใบ ระบบไพ่กลับหัว Responsive Card Fan และสารานุกรมความหมายไพ่</p>
+        <p class="lead">พิมพ์ผิดภาษาเพราะลืมสลับ Keyboard Layout? วางข้อความที่ได้ตัวอักษรแปลก ๆ ลงในช่อง แล้วเครื่องมือจะแปลงกลับเป็นข้อความที่ตั้งใจพิมพ์ ทั้งไทย↔อังกฤษและข้อความผสม</p>
       </div>
-      <article class="card card--wide reveal">
-        <div class="card-media"><img src="../assets/img/tarot-live.webp" alt="หน้าจอเลือกไพ่แบบพัดของเว็บไซต์พยากรณ์แห่งดวงดาว" width="1600" height="898" srcset="../assets/img/tarot-live-800.webp 800w, ../assets/img/tarot-live.webp 1600w" sizes="(min-width: 720px) 55vw, 100vw" loading="lazy" decoding="async"></div>
-        <div class="card-body">
-          <div class="card-meta"><span class="status status--personal">Published web app</span><span class="label">Personal · 2025</span></div>
-          <h3>Tarot Web App</h3>
-          <p>ออกแบบ interaction ของสำรับไพ่ด้วย HTML5 Canvas และ CSS animation รองรับการสุ่มไพ่หลายรูปแบบ ไพ่กลับหัว และการใช้งานบนหน้าจอทุกขนาด</p>
-          <ul class="tags"><li>Vanilla JS</li><li>HTML5 Canvas</li><li>Tailwind CSS</li></ul>
-          <div class="card-links">
-            <a class="link-arrow" href="../tarot/"><span>Open full screen</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-            <a class="link-arrow" href="https://github.com/Thanatvij/tarot" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span class="sr-only"> (เปิดในแท็บใหม่)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      <div class="kt card reveal" id="kt" data-cursor="hide">
+        <div class="kt-grid">
+          <div class="kt-pane">
+            <label class="label" for="kt-in">Typed with the wrong layout</label>
+            <textarea id="kt-in" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="เช่น  l;ylfu8iy[   หรือ   นา 8iy[gfuJp; แ้ำแา .sh"></textarea>
+          </div>
+          <div class="kt-pane">
+            <span class="label" id="kt-out-label">Fixed text</span>
+            <output id="kt-out" class="kt-out is-empty" for="kt-in" aria-labelledby="kt-out-label" data-placeholder="ผลลัพธ์จะแสดงตรงนี้ · The result appears here"></output>
           </div>
         </div>
-      </article>
-
-      <div class="live-embed tarot-embed mt-2 reveal" data-cursor="hide">
-        <div class="embed-bar"><span>ลองเล่นได้เลย — พยากรณ์แห่งดวงดาว</span><a href="../tarot/">Open full screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
-        <iframe src="../tarot/?embedded=1" title="พยากรณ์แห่งดวงดาว — Tarot Web App (เดโมที่ลองเล่นได้)" loading="lazy" width="1200" height="760"></iframe>
+        <div class="kt-bar">
+          <button class="btn btn--primary" type="button" id="kt-convert">Convert</button>
+          <button class="btn btn--ghost" type="button" id="kt-copy" disabled>Copy result</button>
+          <button class="btn btn--ghost" type="button" id="kt-clear">Clear</button>
+          <span class="kt-status" id="kt-status" role="status" aria-live="polite"></span>
+          <label class="kt-live"><input type="checkbox" id="kt-live" checked> Convert as I type</label>
+        </div>
+        <p class="kt-mode label" id="kt-mode"></p>
+        <div class="kt-examples">
+          <span class="label">Try an example</span>
+          <button type="button" class="kt-chip" data-example="l;ylfu8iy[">l;ylfu8iy[</button>
+          <button type="button" class="kt-chip" data-example="นา 8iy[gfuJp; แ้ำแา .sh">นา 8iy[gfuJp; แ้ำแา .sh</button>
+          <button type="button" class="kt-chip" data-example="l;ylfu8iy[ ๅ/_ภ">l;ylfu8iy[ ๅ/_ภ</button>
+        </div>
+        <p class="kt-note">ทำงานในเบราว์เซอร์ของคุณทั้งหมด ไม่ส่งข้อความไปที่ไหน · Runs entirely in your browser, nothing is sent anywhere. Same mapping and rules as the Python tool (27 of 27 documented test cases pass).</p>
       </div>
-      <noscript><p class="mt-1">เดโมนี้ต้องใช้ JavaScript — <a class="link" href="../tarot/">เปิดเว็บแอปแบบเต็มหน้าจอ</a></p></noscript>
+      <noscript><p class="mt-1">เดโมนี้ต้องใช้ JavaScript — ดูเวอร์ชัน Python ได้ที่ <a class="link" href="https://github.com/Thanatvij/keyboardTrans">GitHub</a></p></noscript>
+      <p class="more"><a class="link-arrow" href="https://github.com/Thanatvij/keyboardTrans" target="_blank" rel="noopener noreferrer"><span>Python source on GitHub</span><span class="sr-only"> (เปิดในแท็บใหม่)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
     </div>
   </section>
 
@@ -158,18 +168,16 @@
         </article>
 
         <article class="card card--wide reveal">
-          <div class="card-media card-media--terminal">
-            <div class="terminal" role="img" aria-label="ตัวอย่างโปรแกรม keyboardTrans แปลงข้อความที่พิมพ์ด้วยแป้นพิมพ์ผิดภาษา: พิมพ์ l;ylfu8iy[ ได้ผลลัพธ์ สวัสดีครับ">
-              <div class="bar-dots" aria-hidden="true"><i></i><i></i><i></i><span>keyboardTrans.py</span></div>
-              <div aria-hidden="true"><b>$</b> python keyboardTrans.py<br><b>input  ›</b> l;ylfu8iy[<br><b>output ›</b> สวัสดีครับ<br><em>Copied to clipboard ✓</em></div>
-            </div>
-          </div>
+          <div class="card-media"><img data-parallax="0.05" data-parallax-max="12" src="../assets/img/tarot-live.webp" alt="หน้าจอเลือกไพ่แบบพัดของเว็บไซต์พยากรณ์แห่งดวงดาว" width="1600" height="898" srcset="../assets/img/tarot-live-800.webp 800w, ../assets/img/tarot-live.webp 1600w" sizes="(min-width: 720px) 55vw, 100vw" loading="lazy" decoding="async"></div>
           <div class="card-body">
-            <div class="card-meta"><span class="status status--personal">Personal utility</span><span class="label">Python · 2024</span></div>
-            <h3>keyboardTrans</h3>
-            <p>เครื่องมือออฟไลน์สำหรับแปลงข้อความที่พิมพ์ด้วย Keyboard Layout ผิดภาษา รองรับไทย↔อังกฤษ ข้อความผสม และคัดลอกผลลัพธ์ไปยัง Clipboard โดยอัตโนมัติ</p>
-            <ul class="tags"><li>Python</li><li>String processing</li><li>27 exact-match tests</li></ul>
-            <div class="card-links"><a class="link-arrow" href="https://github.com/Thanatvij/keyboardTrans" target="_blank" rel="noopener noreferrer"><span>View on GitHub</span><span class="sr-only"> (เปิดในแท็บใหม่)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+            <div class="card-meta"><span class="status status--personal">Published web app</span><span class="label">Web app · 2025</span></div>
+            <h3>Tarot Web App</h3>
+            <p>เว็บดูดวงไพ่ทาโรต์ภาษาไทยชื่อ “พยากรณ์แห่งดวงดาว” มีไพ่ครบ 78 ใบ ระบบไพ่กลับหัว Responsive Card Fan ที่วาดด้วย HTML5 Canvas และสารานุกรมความหมายไพ่</p>
+            <ul class="tags"><li>Vanilla JS</li><li>HTML5 Canvas</li><li>Tailwind CSS</li></ul>
+            <div class="card-links">
+              <a class="link-arrow" href="../tarot/"><span>Open the app</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+              <a class="link-arrow" href="https://github.com/Thanatvij/tarot" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span class="sr-only"> (เปิดในแท็บใหม่)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            </div>
           </div>
         </article>
 
@@ -205,6 +213,8 @@
     <p class="footer-legal"><span>© <span data-year>2026</span> Thanat Vijitrakanlikit</span><span>Static site, hosted on GitHub Pages</span></p>
   </div>
 </footer>
+<script src="../assets/js/keyboardtrans-core.js"></script>
+<script src="../assets/js/keyboardtrans.js" defer></script>
 <script src="../assets/js/main.js" defer></script>
 </body>
 </html>
