@@ -1,0 +1,7 @@
+# Binary assets: never render as text diffs
+*.pdf binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.mp4 binary
