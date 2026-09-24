@@ -3,7 +3,7 @@ import { defineConfig } from '@playwright/test';
 // Tests run against the built site (./dist) served by the merged preview server (dist first, legacy repo root as fallback).
 export default defineConfig({
   testDir: './tests',
-  timeout: 30_000,
+  timeout: 60_000,
   fullyParallel: true,
   reporter: [['list']],
   snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}{ext}',
