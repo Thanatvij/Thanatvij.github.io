@@ -5,7 +5,7 @@ interface Props { id: string; eyebrow: string; titleStart: string; titleEmphasis
 const { id, eyebrow, titleStart, titleEmphasis, lead, cta } = Astro.props;
 ---
 <section class="section section--tint" aria-labelledby={id}>
-  <div class="wrap section-head">
+  <div class="wrap section-head reveal">
     <div>
       <p class="eyebrow">{eyebrow}</p>
       <h2 class="h2" id={id}>{titleStart} <em>{titleEmphasis}</em></h2>

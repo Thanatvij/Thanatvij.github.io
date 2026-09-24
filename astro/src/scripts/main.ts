@@ -5,7 +5,7 @@
 import { initTheme } from './theme';
 import { initMenu } from './menu';
 import { initAnalytics } from './analytics';
-import { initMisc } from './misc';
+import { initMisc, initCountUp } from './misc';
 import { initMotion } from './motion';
 
 // theme.js (blocking, in <head>) removes the `.js` flag after 4 s if this file never arrives.
@@ -16,4 +16,5 @@ initTheme();
 initMenu();
 initAnalytics();
 initMisc();
+initCountUp();
 initMotion();

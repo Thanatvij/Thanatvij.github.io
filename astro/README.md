@@ -39,6 +39,7 @@ npm run test:update      # re-record the pixel baselines (only after an intended
 | `links.spec.ts` | every internal link, image, stylesheet, script and same-page anchor resolves; external `_blank` links have `noopener`; the featured TutorHub card points straight at the live demo |
 | `interaction.spec.ts` | skip link, visible focus on every tab stop, keyboard theme toggle + persistence, mobile menu, reduced-motion (nothing hidden, no Lenis), touch (no overflow, tap targets, no pointer effects) |
 | `motion-parity.spec.ts` | every page (Astro and static) gets the same effects: cursor ring, Lenis, scroll reveal, hero spotlight; none of them under reduced motion or on touch |
+| `motion-strength.spec.ts` | reveal travel and stagger, count-up numbers, inner-page hero load-in, parallax range (desktop vs phone), step-diagram circle pop, hover responses, keyboardTrans flash; each with a reduced-motion counterpart |
 | `type-scale.spec.ts` | 1280 / 1440 / 1920 / 2560 px: no horizontal overflow, body and h1 sizes stay bounded |
 | `keyboardtrans.spec.ts` | JS port of KeyboardTran.py: the 27 documented cases, 600-input differential check against Python, and the widget on `/personal-projects/` |
 | `visual.spec.ts` | full-page pixel diff (1% tolerance) of both pages, desktop + mobile, light + dark, against `tests/__screenshots__/` |

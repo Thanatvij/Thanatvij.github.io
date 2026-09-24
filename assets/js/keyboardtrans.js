@@ -12,6 +12,13 @@
   const live = root.querySelector('#kt-live');
   const copyBtn = root.querySelector('#kt-copy');
   let statusTimer = 0;
+  let lastResult = '';
+
+  const flash = () => {            // brief highlight so a change of output is noticed
+    output.classList.remove('is-flash');
+    void output.offsetWidth;
+    output.classList.add('is-flash');
+  };
 
   const say = (message) => {
     status.textContent = message;
@@ -23,6 +30,8 @@
     const text = input.value;
     const result = KT.fix(text);
     output.textContent = result;
+    if (result !== lastResult && result.trim()) flash();
+    lastResult = result;
     output.classList.toggle('is-empty', !text.trim());
     mode.textContent = !text.trim() ? '' : KT.hasThai(text) ? 'Detected: Thai characters → English keys' : 'Detected: English keys → Thai';
     copyBtn.disabled = !text.trim();
@@ -51,7 +60,7 @@
   live.addEventListener('change', () => { if (live.checked) convert(); });
   copyBtn.addEventListener('click', async () => {
     const result = convert();
-    try { await copyText(result); say('คัดลอกแล้ว · Copied to clipboard ✓'); }
+    try { await copyText(result); flash(); say('คัดลอกแล้ว · Copied to clipboard ✓'); }
     catch { say('คัดลอกไม่สำเร็จ — เลือกข้อความแล้วกด Ctrl/⌘+C · Copy failed, select the text and copy it manually'); }
   });
   root.querySelector('#kt-clear').addEventListener('click', () => { input.value = ''; convert(); input.focus(); });

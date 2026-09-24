@@ -60,13 +60,13 @@ function reveal() {
     onEnter: (batch) => {
       gsap.fromTo(
         batch,
-        { opacity: 0, y: 18 },
+        { opacity: 0, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.9,
           ease: 'power3.out',
-          stagger: 0.08,
+          stagger: 0.12,
           overwrite: true,
           onStart() { (this.targets() as HTMLElement[]).forEach((el) => el.classList.add('is-in')); },
           onComplete() { (this.targets() as HTMLElement[]).forEach(show); },
@@ -80,7 +80,7 @@ function reveal() {
    Tweens a CSS variable (--py), so it never fights the hover `transform: scale()` on the same element. */
 function parallax() {
   $$('[data-parallax]').forEach((el) => {
-    const max = Number(el.dataset.parallaxMax ?? 12);
+    const max = Number(el.dataset.parallaxMax ?? 12) * (window.matchMedia('(max-width: 719.98px)').matches ? 0.5 : 1);   // half the travel on phones
     const factor = Number(el.dataset.parallax ?? 0.06);          // px of drift per px of scroll, as before
     const range = max / factor;                                   // scroll distance over which it travels −max → +max
     gsap.fromTo(

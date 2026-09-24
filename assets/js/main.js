@@ -75,6 +75,52 @@
 
   initSkillTips();
 
+  /** Count-up for stat numbers (.strip-item / .metric): "17,767", "86.04%", "13" run from 0 to their value the first time they scroll into view.
+   *  The original text stays in the DOM (screen readers get it) until the animation starts, and nothing runs under reduced motion. */
+  const initCountUp = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const targets = Array.from(document.querySelectorAll('.strip-item strong, .metric strong'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        run(entry.target);
+      });
+    }, { threshold: 0.6 });
+    const run = (el) => {
+      const finalText = el.textContent.trim();
+      const m = finalText.match(/^(\D*)(\d[\d,]*(?:\.\d+)?)(\D*)$/);
+      if (!m) return;
+      const [, prefix, numText, suffix] = m;
+      const value = parseFloat(numText.replace(/,/g, ''));
+      const decimals = (numText.split('.')[1] || '').length;
+      const grouped = numText.includes(',');
+      const format = (v) => prefix + (grouped
+        ? v.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+        : v.toFixed(decimals)) + suffix;
+      const visual = document.createElement('span');
+      visual.setAttribute('aria-hidden', 'true');
+      const reader = document.createElement('span');
+      reader.className = 'sr-only';
+      reader.textContent = finalText;
+      el.textContent = '';
+      el.append(visual, reader);
+      const start = performance.now();
+      const duration = 1200;
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        visual.textContent = t < 1 ? format(value * eased) : finalText;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      visual.textContent = format(0);
+      requestAnimationFrame(tick);
+    };
+    targets.forEach((el) => observer.observe(el));
+  };
+
+  initCountUp();
+
   /* ---------- Theme ---------- */
   const themeButtons = $$('[data-theme-toggle]');
   const themeMeta = $('meta[name="theme-color"]');
@@ -119,14 +165,21 @@
   });
   desktopNav.addEventListener('change', event => { if (event.matches) setMenu(false); });
 
-  /* ---------- Reveal on scroll ---------- */
+  /* ---------- Reveal on scroll (items that arrive together stagger 120 ms apart, like the Astro build) ---------- */
   const revealTargets = $$('.reveal');
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-in');
-        revealObserver.unobserve(entry.target);
+      const arriving = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((x, y) => (x.boundingClientRect.top - y.boundingClientRect.top) || (x.boundingClientRect.left - y.boundingClientRect.left));
+      arriving.forEach((entry, index) => {
+        const element = entry.target;
+        revealObserver.unobserve(element);
+        if (index && !reduceMotion.matches) {
+          element.style.transitionDelay = `${index * 120}ms`;
+          setTimeout(() => { element.style.transitionDelay = ''; }, index * 120 + 1200);   // don't leave the delay on later hover transitions
+        }
+        element.classList.add('is-in');
       });
     }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
     revealTargets.forEach(element => revealObserver.observe(element));
@@ -282,7 +335,7 @@
       visible.forEach(element => {
         const box = element.getBoundingClientRect();
         const factor = parseFloat(element.dataset.parallax) || 0.05;
-        const limit = parseFloat(element.dataset.parallaxMax) || 14;
+        const limit = (parseFloat(element.dataset.parallaxMax) || 14) * (window.innerWidth < 720 ? 0.5 : 1);   // half the travel on phones
         const offset = Math.max(-limit, Math.min(limit, (middle - (box.top + box.height / 2)) * factor));
         element.style.translate = `0 ${offset.toFixed(1)}px`;
       });

@@ -5,6 +5,6 @@ const { data } = Astro.props;
 ---
 <section class="strip" aria-label={data.ariaLabel}>
   <div class="wrap strip-grid">
-    {data.items.map((i) => <div class="strip-item"><strong>{i.value}</strong><span>{i.label}</span></div>)}
+    {data.items.map((i) => <div class="strip-item reveal"><strong>{i.value}</strong><span>{i.label}</span></div>)}
   </div>
 </section>

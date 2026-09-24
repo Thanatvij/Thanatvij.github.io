@@ -22,7 +22,7 @@ const site = (await getEntry('site', 'site'))!.data;
     <article class="card card--wide reveal">
       {c.image && (
         <div class="card-media">
-          <img data-parallax="0.05" data-parallax-max="12" src={c.image.src} srcset={c.image.small ? `${c.image.small} 800w, ${c.image.src} ${c.image.width}w` : undefined} sizes="(min-width: 720px) 55vw, 100vw" alt={c.image.alt} width={c.image.width} height={c.image.height} loading="lazy" decoding="async" />
+          <img data-parallax="0.09" data-parallax-max="24" src={c.image.src} srcset={c.image.small ? `${c.image.small} 800w, ${c.image.src} ${c.image.width}w` : undefined} sizes="(min-width: 720px) 55vw, 100vw" alt={c.image.alt} width={c.image.width} height={c.image.height} loading="lazy" decoding="async" />
         </div>
       )}
       {c.terminal && (
