@@ -13,7 +13,7 @@ const headingId = `t-${it.id}`;
 ---
 <article class:list={['comp', it.flag && 'comp--flagship', 'reveal']} id={it.id} aria-labelledby={headingId}>
   <div class="comp-cover">
-    <a class="comp-media" href={it.href} data-cursor="view" tabindex="-1" aria-hidden="true">
+    <a class="comp-media" href={it.href} tabindex="-1" aria-hidden="true">
       <img src={c.src} alt={c.alt} width={c.width} height={c.height} srcset={c.small ? `${c.small} 800w, ${c.src} ${c.width}w` : undefined} sizes="(min-width: 960px) 50vw, 100vw" loading="lazy" decoding="async" />
     </a>
     <p class="deck-cap"><a class="deck-link" href={it.deck.href} target="_blank" rel="noopener noreferrer"><span>{deckLabel}</span><span class="sr-only">{newTab}</span><Icon name="arrow-ur" /><span class="file-size">{it.deck.size}</span></a></p>

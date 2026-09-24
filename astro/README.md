@@ -5,7 +5,7 @@ the **home page** (`/`) and the **competitions list** (`/projects/`). Nothing ou
 by it, and the existing site keeps working exactly as before.
 
 - Output is **plain static HTML/CSS/JS** in `astro/dist/`: no server, adapter or runtime, same URLs as today.
-- Scroll and cursor animation uses **GSAP + ScrollTrigger** and **Lenis**.
+- Scroll animation uses **GSAP + ScrollTrigger** and **Lenis**.
 - All text lives in YAML files under `src/content/`; components only lay it out.
 
 ## Commands
@@ -38,7 +38,7 @@ npm run test:update      # re-record the pixel baselines (only after an intended
 | `a11y.spec.ts` | axe-core (WCAG 2.0/2.1/2.2 A+AA, best-practice) on all nine pages (embedded iframes excluded), light and dark, with and without reduced motion |
 | `links.spec.ts` | every internal link, image, stylesheet, script and same-page anchor resolves; external `_blank` links have `noopener`; the featured TutorHub card points straight at the live demo |
 | `interaction.spec.ts` | skip link, visible focus on every tab stop, keyboard theme toggle + persistence, mobile menu, reduced-motion (nothing hidden, no Lenis), touch (no overflow, tap targets, no pointer effects) |
-| `motion-parity.spec.ts` | every page (Astro and static) gets the same effects: cursor ring, Lenis, scroll reveal, hero spotlight; none of them under reduced motion or on touch |
+| `motion-parity.spec.ts` | every page (Astro and static) gets the same effects: Lenis, scroll reveal, hero spotlight; none of them under reduced motion or on touch |
 | `motion-strength.spec.ts` | reveal travel and stagger, count-up numbers, inner-page hero load-in, parallax range (desktop vs phone), step-diagram circle pop, hover responses, keyboardTrans flash; each with a reduced-motion counterpart |
 | `type-scale.spec.ts` | 1280 / 1440 / 1920 / 2560 px: no horizontal overflow, body and h1 sizes stay bounded |
 | `keyboardtrans.spec.ts` | JS port of KeyboardTran.py: the 27 documented cases, 600-input differential check against Python, and the widget on `/personal-projects/` |
@@ -91,7 +91,7 @@ Everything is behind `gsap.matchMedia()`:
 | --- | --- |
 | `prefers-reduced-motion: reduce` | Nothing. CSS shows all content immediately; native scrolling. |
 | Touch / coarse pointer | Scroll-reveal and image parallax (ScrollTrigger). Native scrolling, no pointer effects. |
-| Mouse / trackpad (`hover: hover` + `pointer: fine`) | The above plus Lenis smooth wheel scrolling, cursor ring, hero spotlight, card glow. |
+| Mouse / trackpad (`hover: hover` + `pointer: fine`) | The above plus Lenis smooth wheel scrolling, hero spotlight, card glow. |
 
 If a visitor changes a setting while the page is open, everything is torn down or started without a reload.
 Lenis is stopped while the mobile menu is open. Keyboard scrolling (Space, PageUp/Down, Home/End), Tab focus

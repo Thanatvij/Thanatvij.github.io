@@ -63,7 +63,6 @@ test.describe('reduced motion', () => {
     const hidden = await page.evaluate(() =>
       [...document.querySelectorAll('.reveal')].filter((el) => { const cs = getComputedStyle(el); return cs.opacity === '0' || cs.visibility === 'hidden'; }).length);
     expect(hidden).toBe(0);
-    await expect(page.locator('.cursor, [data-cursor-ring]')).toHaveCount(0);
     await ctx.close();
   });
 

@@ -187,65 +187,13 @@
     revealTargets.forEach(element => element.classList.add('is-in'));
   }
 
-  /* ---------- Pointer accents: cursor ring, hero spotlight, card glow ---------- */
+  /* ---------- Pointer accents: hero spotlight, card glow ---------- */
   let fxActive = false;
   const cleanups = [];
-  const linkSelector = 'a[href], button, summary, label, input, select, textarea, [role="button"], [data-cursor]';
 
   const enablePointerFx = () => {
     if (fxActive) return;
     fxActive = true;
-
-    // Cursor ring (the native cursor stays visible; the ring is a lagging accent).
-    const cursor = document.createElement('div');
-    cursor.className = 'cursor';
-    cursor.setAttribute('aria-hidden', 'true');
-    cursor.innerHTML = '<div class="cursor-ring"><span class="cursor-label">Open</span></div>';
-    document.body.appendChild(cursor);
-    const label = $('.cursor-label', cursor);
-    let targetX = 0, targetY = 0, x = 0, y = 0, running = false;
-    const tick = () => {
-      x += (targetX - x) * 0.22;
-      y += (targetY - y) * 0.22;
-      cursor.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
-      if (Math.abs(targetX - x) > 0.2 || Math.abs(targetY - y) > 0.2) requestAnimationFrame(tick);
-      else running = false;
-    };
-    const onMove = event => {
-      if (event.pointerType && event.pointerType !== 'mouse') return;
-      if (!cursor.classList.contains('is-active')) { x = targetX = event.clientX; y = targetY = event.clientY; }
-      targetX = event.clientX;
-      targetY = event.clientY;
-      cursor.classList.add('is-active');
-      cursor.classList.remove('is-hidden');
-      if (!running) { running = true; requestAnimationFrame(tick); }
-    };
-    const onOver = event => {
-      const target = event.target instanceof Element ? event.target : null;
-      if (!target) return;
-      const hidden = target.closest('iframe, [data-cursor="hide"]');
-      const view = target.closest('[data-cursor="view"]');
-      cursor.classList.toggle('is-hidden', Boolean(hidden));
-      cursor.classList.toggle('is-view', Boolean(view) && !hidden);
-      cursor.classList.toggle('is-link', Boolean(target.closest(linkSelector)) && !view && !hidden);
-      if (view) label.textContent = view.getAttribute('data-cursor-label') || 'Open';
-    };
-    const onDown = () => cursor.classList.add('is-down');
-    const onUp = () => cursor.classList.remove('is-down');
-    const onLeave = () => cursor.classList.add('is-hidden');
-    document.addEventListener('pointermove', onMove, { passive: true });
-    document.addEventListener('pointerover', onOver, { passive: true });
-    document.addEventListener('pointerdown', onDown, { passive: true });
-    document.addEventListener('pointerup', onUp, { passive: true });
-    document.documentElement.addEventListener('mouseleave', onLeave);
-    cleanups.push(() => {
-      document.removeEventListener('pointermove', onMove);
-      document.removeEventListener('pointerover', onOver);
-      document.removeEventListener('pointerdown', onDown);
-      document.removeEventListener('pointerup', onUp);
-      document.documentElement.removeEventListener('mouseleave', onLeave);
-      cursor.remove();
-    });
 
     // Hero spotlight (dot-grid highlight that follows the pointer).
     $$('[data-spotlight]').forEach(area => {

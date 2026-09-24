@@ -1,9 +1,9 @@
 /**
- * Scroll- and pointer-driven motion: GSAP + ScrollTrigger for reveal / parallax / cursor, Lenis for
+ * Scroll- and pointer-driven motion: GSAP + ScrollTrigger for reveal / parallax, Lenis for
  * smooth wheel scrolling. All of it sits behind media queries via gsap.matchMedia():
  *
  *   prefers-reduced-motion: reduce      → nothing here runs; CSS shows all content immediately
- *   (hover: hover) and (pointer: fine)  → Lenis smooth scroll + cursor ring + hero spotlight + card glow
+ *   (hover: hover) and (pointer: fine)  → Lenis smooth scroll + hero spotlight + card glow
  *   touch / coarse pointer              → reveal + parallax only; native scrolling, no pointer effects
  *
  * If the user flips a setting while the page is open, matchMedia reverts everything cleanly.
@@ -128,47 +128,8 @@ function smoothScroll() {
   };
 }
 
-/* ---------- precise-pointer effects: cursor ring, hero spotlight, card glow ---------- */
+/* ---------- precise-pointer effects: hero spotlight, card glow ---------- */
 function pointerEffects() {
-  const linkSelector = 'a[href], button, summary, label, input, select, textarea, [role="button"], [data-cursor]';
-
-  // Cursor ring. The native cursor is never hidden; the ring is a lagging accent.
-  const cursor = document.createElement('div');
-  cursor.className = 'cursor';
-  cursor.setAttribute('aria-hidden', 'true');
-  cursor.innerHTML = '<div class="cursor-ring"><span class="cursor-label">Open</span></div>';
-  document.body.appendChild(cursor);
-  const label = cursor.querySelector<HTMLElement>('.cursor-label')!;
-  const moveX = gsap.quickTo(cursor, 'x', { duration: 0.4, ease: 'power3' });
-  const moveY = gsap.quickTo(cursor, 'y', { duration: 0.4, ease: 'power3' });
-
-  const onMove = (e: PointerEvent) => {
-    if (e.pointerType && e.pointerType !== 'mouse') return;
-    if (!cursor.classList.contains('is-active')) gsap.set(cursor, { x: e.clientX, y: e.clientY });
-    moveX(e.clientX);
-    moveY(e.clientY);
-    cursor.classList.add('is-active');
-    cursor.classList.remove('is-hidden');
-  };
-  const onOver = (e: PointerEvent) => {
-    const t = e.target instanceof Element ? e.target : null;
-    if (!t) return;
-    const hidden = t.closest('iframe, [data-cursor="hide"]');
-    const view = t.closest<HTMLElement>('[data-cursor="view"]');
-    cursor.classList.toggle('is-hidden', Boolean(hidden));
-    cursor.classList.toggle('is-view', Boolean(view) && !hidden);
-    cursor.classList.toggle('is-link', Boolean(t.closest(linkSelector)) && !view && !hidden);
-    if (view) label.textContent = view.getAttribute('data-cursor-label') || 'Open';
-  };
-  const onDown = () => cursor.classList.add('is-down');
-  const onUp = () => cursor.classList.remove('is-down');
-  const onLeave = () => cursor.classList.add('is-hidden');
-  document.addEventListener('pointermove', onMove, { passive: true });
-  document.addEventListener('pointerover', onOver, { passive: true });
-  document.addEventListener('pointerdown', onDown, { passive: true });
-  document.addEventListener('pointerup', onUp, { passive: true });
-  document.documentElement.addEventListener('mouseleave', onLeave);
-
   // Hero spotlight: the accent dot grid follows the pointer with a little easing.
   const spotlightCleanups = $$('[data-spotlight]').map((area) => {
     const field = area.querySelector<HTMLElement>('.hero-field') ?? area;
@@ -199,13 +160,7 @@ function pointerEffects() {
   });
 
   return () => {
-    document.removeEventListener('pointermove', onMove);
-    document.removeEventListener('pointerover', onOver);
-    document.removeEventListener('pointerdown', onDown);
-    document.removeEventListener('pointerup', onUp);
-    document.documentElement.removeEventListener('mouseleave', onLeave);
     spotlightCleanups.forEach((fn) => fn());
     cardCleanups.forEach((fn) => fn());
-    cursor.remove();
   };
 }

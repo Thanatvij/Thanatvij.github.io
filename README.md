@@ -70,8 +70,8 @@ navigation, edit all eight pages.
   Measured extra spacing is at most 0.07 em per glyph.
 - **Motion.** Reveal on scroll (0.7 s), hover states, ≤ 14 px parallax on one image, a
   0.26 s cross-document fade. No intro, no scroll hijacking.
-- **Pointer.** A lagging ring appears only on `(hover: hover) and (pointer: fine)` and only when
-  `prefers-reduced-motion` is not set. The native cursor is never hidden.
+- **Pointer.** The hero spotlight and card glow follow the pointer only on `(hover: hover) and
+  (pointer: fine)` and only when `prefers-reduced-motion` is not set. There is no custom cursor.
 - **Without JavaScript.** All content is visible, and the navigation is a wrapped row.
 - **Security.** Every page carries a strict CSP (`script-src 'self'` plus Google Tag Manager,
   `style-src 'self'`, no executable inline scripts, no inline styles). Do not add `style="..."` attributes or inline

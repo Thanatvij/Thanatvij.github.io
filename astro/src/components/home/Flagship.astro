@@ -6,7 +6,7 @@ interface Props { data: CollectionEntry<'home'>['data']['flagship'] }
 const { data: f } = Astro.props;
 ---
 <article class="flagship" aria-labelledby="flagship-title">
-  <a class="flagship-media" href={f.link.href} data-cursor="view" tabindex="-1" aria-hidden="true">
+  <a class="flagship-media" href={f.link.href} tabindex="-1" aria-hidden="true">
     <img data-parallax="0.06" data-parallax-max="12" src={f.image.src} alt={f.image.alt} width={f.image.width} height={f.image.height} fetchpriority="high" />
     <span class="flag flagship-badge">{f.badge}</span>
     <span class="reticle"><i></i><i></i><i></i><i></i></span>
