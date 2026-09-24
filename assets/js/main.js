@@ -32,6 +32,49 @@
   if ('requestIdleCallback' in window) window.requestIdleCallback(loadAnalytics, { timeout: 4000 });
   else window.setTimeout(loadAnalytics, 2000);
 
+  /** Skill tags: hover and keyboard focus are pure CSS; this adds tap-to-toggle (touch browsers often don't focus buttons) and Escape / outside-tap dismissal. */
+  const initSkillTips = () => {
+    const skills = Array.from(document.querySelectorAll('.skill'));
+    const close = (except) => skills.forEach((s) => {
+      if (s === except) return;
+      s.classList.remove('is-open');
+      s.querySelector('.skill-btn')?.setAttribute('aria-expanded', 'false');
+    });
+    skills.forEach((s) => s.querySelector('.skill-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = !s.classList.contains('is-open');
+      close(s);
+      place(s);
+      s.classList.toggle('is-open', open);
+      e.currentTarget.setAttribute('aria-expanded', String(open));
+    }));
+    document.addEventListener('click', () => close());
+    // Keep the bubble inside the viewport: measure it at its natural spot and shift it sideways by --tip-x.
+    const place = (s) => {
+      const tip = s.querySelector('.skill-tip');
+      tip.style.setProperty('--tip-x', '0px');
+      const box = tip.getBoundingClientRect();
+      const margin = 12;
+      let dx = 0;
+      if (box.right > window.innerWidth - margin) dx = window.innerWidth - margin - box.right;
+      if (box.left + dx < margin) dx = margin - box.left;
+      tip.style.setProperty('--tip-x', dx + 'px');
+    };
+    skills.forEach((s) => {
+      ['pointerenter', 'focusin'].forEach((type) => s.addEventListener(type, () => place(s)));
+      const undismiss = () => s.classList.remove('is-dismissed');
+      s.addEventListener('pointerleave', undismiss);
+      s.addEventListener('focusout', undismiss);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      close();
+      skills.forEach((s) => { if (s.matches(':hover, :focus-within')) s.classList.add('is-dismissed'); });
+    });
+  };
+
+  initSkillTips();
+
   /* ---------- Theme ---------- */
   const themeButtons = $$('[data-theme-toggle]');
   const themeMeta = $('meta[name="theme-color"]');
@@ -199,7 +242,9 @@
   const onMenuLock = event => { if (lenis) event.detail.open ? lenis.stop() : lenis.start(); };
   const startLenis = () => {
     if (lenis || !window.Lenis) return;
-    lenis = new window.Lenis({ autoRaf: false, lerp: 0.1, smoothWheel: true, anchors: { offset: -80 }, stopInertiaOnNavigate: true });
+    // Light touch: a short ease-out (0.5 s, quartic). `?lenis=old` restores the previous heavy setting (lerp 0.1) for comparison.
+    const legacy = new URLSearchParams(location.search).get('lenis') === 'old';
+    lenis = new window.Lenis({ autoRaf: false, ...(legacy ? { lerp: 0.1 } : { duration: 0.5, easing: t => 1 - Math.pow(1 - t, 4) }), smoothWheel: true, anchors: { offset: -80 }, stopInertiaOnNavigate: true });
     lenisFrame = requestAnimationFrame(lenisTick);
     document.addEventListener('portfolio:menu', onMenuLock);
   };

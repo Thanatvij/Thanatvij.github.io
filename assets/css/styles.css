@@ -445,7 +445,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .toolbox > div { display: grid; gap: .6rem 2rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
 .toolbox dt { font-family: var(--font-mono); font-size: var(--fs-label); letter-spacing: .09em; text-transform: uppercase; color: var(--accent); padding-top: .35rem; }
 .toolbox dd { display: flex; flex-wrap: wrap; gap: .45rem .5rem; }
-.toolbox dd span { padding: .2rem .8rem; border: 1px solid var(--line-strong); border-radius: 999px; font-size: var(--fs-small); background: var(--surface); }
+.skill-hint { font-family: var(--font-sans); color: var(--muted); text-transform: none; letter-spacing: .02em; margin-bottom: 1rem; }
+.skill { position: relative; display: inline-block; }
+.has-tips { overflow-x: clip; }   /* hidden bubbles near the right edge must not widen the page */
+.skill-btn { padding: .3rem .95rem; border: 1px solid var(--line-strong); border-radius: 999px; font: inherit; font-size: var(--fs-small); color: var(--ink); background: var(--surface); cursor: help; min-height: 36px; transition: border-color var(--t-fast), background var(--t-fast), transform var(--t-fast) var(--ease); }
+.skill-btn:hover, .skill-btn[aria-expanded="true"] { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+.skill-tip { position: absolute; z-index: 20; left: 0; top: calc(100% + .55rem); width: max-content; max-width: min(18rem, calc(100vw - 2 * var(--gutter))); padding: .7rem .9rem; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--ink-2); font-size: var(--fs-small); line-height: 1.55; box-shadow: var(--shadow); opacity: 0; visibility: hidden; transform: translateY(-4px); translate: var(--tip-x, 0px) 0; pointer-events: none; transition: opacity var(--t-fast), transform var(--t-fast) var(--ease), visibility 0s linear var(--t-fast); }
+.skill:hover .skill-tip, .skill:focus-within .skill-tip, .skill.is-open .skill-tip { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.skill.is-dismissed .skill-tip { opacity: 0; visibility: hidden; }   /* Escape hides it without moving focus or the pointer (WCAG 1.4.13) */
+@media (prefers-reduced-motion: reduce) { .skill-btn, .skill-tip { transition: none; } .skill-btn:hover { transform: none; } }
 @media (min-width: 800px) { .toolbox > div { grid-template-columns: 14rem 1fr; } }
 
 /* ---------- CTA band ---------- */

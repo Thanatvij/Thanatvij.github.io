@@ -127,3 +127,41 @@ test.describe('skill tooltips (home)', () => {
     expect(empty).toBe(0);
   });
 });
+
+test.describe('skill tooltips (about, static)', () => {
+  test('every one of the skill tags has a tip; hover, focus and Escape work', async ({ page }) => {
+    await page.goto('/about/');
+    const n = await page.locator('.skill').count();
+    expect(n).toBeGreaterThanOrEqual(25);
+    const empty = await page.$$eval('.skill', (els) => els.filter((e) => !(e.querySelector('.skill-tip')?.textContent || '').trim()).length);
+    expect(empty).toBe(0);
+    const skill = page.locator('.skill').nth(5);
+    const tip = skill.locator('.skill-tip');
+    await expect(tip).toBeHidden();
+    await skill.locator('.skill-btn').hover();
+    await expect(tip).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(tip).toBeHidden();
+    await page.mouse.move(0, 0);
+    await page.locator('.skill-btn').nth(8).focus();
+    await expect(page.locator('.skill').nth(8).locator('.skill-tip')).toBeVisible();
+  });
+
+  test('tap toggles on touch and the bubble stays inside a phone viewport', async ({ browser }) => {
+    const ctx = await browser.newContext({ hasTouch: true, isMobile: true, viewport: { width: 390, height: 800 } });
+    const page = await ctx.newPage();
+    await page.goto('/about/');
+    const count = await page.locator('.skill').count();
+    for (const i of [0, 3, 9, 14, count - 1]) {
+      const skill = page.locator('.skill').nth(i);
+      await skill.scrollIntoViewIfNeeded();
+      await skill.locator('.skill-btn').tap();
+      const tip = skill.locator('.skill-tip');
+      await expect(tip).toBeVisible();
+      const box = (await tip.boundingBox())!;
+      expect(box.x, `tip ${i} left`).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width, `tip ${i} right`).toBeLessThanOrEqual(390);
+    }
+    await ctx.close();
+  });
+});

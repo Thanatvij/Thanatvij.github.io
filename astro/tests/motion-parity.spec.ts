@@ -46,3 +46,27 @@ test('parallax images exist on home and personal-projects', async ({ page }) => 
     expect(await page.locator('[data-parallax]').count(), p).toBeGreaterThan(0);
   }
 });
+
+// Lenis should follow the wheel almost immediately: a 600px wheel step must be ~done within half a second.
+for (const path of ['/', '/about/']) {
+  test(`Lenis feels light on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await page.waitForSelector('html.lenis');
+    await page.waitForTimeout(400);
+    await page.mouse.move(700, 450);
+    await page.evaluate(() => {
+      const w = window as unknown as { __s: [number, number][] };
+      w.__s = []; const t0 = performance.now();
+      const tick = () => { w.__s.push([performance.now() - t0, scrollY]); if (performance.now() - t0 < 2000) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+    await page.mouse.wheel(0, 600);
+    await page.waitForTimeout(2100);
+    const s = await page.evaluate(() => (window as unknown as { __s: [number, number][] }).__s);
+    const final = s[s.length - 1][1];
+    const start = s.find((x) => x[1] > 1)![0];
+    const t99 = s.find((x) => x[1] >= final * 0.99)![0] - start;
+    expect(final).toBeGreaterThan(550);
+    expect(t99).toBeLessThan(500);      // the old lerp:0.1 setting took ~750 ms
+  });
+}

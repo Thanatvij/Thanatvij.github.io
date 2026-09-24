@@ -107,7 +107,7 @@ personal:
   lead: ผลงานที่พัฒนานอกการแข่งขัน เพื่อทดลองเทคโนโลยีและสร้างประสบการณ์ที่ผู้ใช้เปิดใช้งานได้จริง
   notice: Not competition entries
   card:
-    image: { src: /assets/img/tutorhub-live.webp, small: /assets/img/tutorhub-live-800.webp, alt: หน้าติวเนื้อหา DTI286 ใน TutorHub แสดงสรุปและเนื้อหาเต็มแบบแยกบท, width: 2580, height: 1451 }
+    image: { src: /assets/img/tutorhub-cover.webp, small: /assets/img/tutorhub-cover-800.webp, alt: "ภาพปกโครงการ TutorHub: ห้องติวสอบที่รวมเนื้อหา แบบฝึกหัด เก็งข้อสอบ คำศัพท์ และ PDF ไว้ในเว็บเดียว", width: 1600, height: 900 }
     status: Published web app
     meta: Personal · 2026
     title: TutorHub

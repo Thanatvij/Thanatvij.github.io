@@ -6,7 +6,7 @@ import ArrowLink from '../ArrowLink.astro';
 interface Props { data: CollectionEntry<'home'>['data']['toolbox'] }
 const { data } = Astro.props;
 ---
-<section class="section section--tint" id="toolbox" aria-labelledby="toolbox-title">
+<section class="section section--tint has-tips" id="toolbox" aria-labelledby="toolbox-title">
   <div class="wrap">
     <SectionHead id="toolbox-title" eyebrow={data.eyebrow} titleStart={data.titleStart} titleEmphasis={data.titleEmphasis} lead={data.lead} />
     <p class="skill-hint label"><span aria-hidden="true">ⓘ</span> {data.hint}</p>

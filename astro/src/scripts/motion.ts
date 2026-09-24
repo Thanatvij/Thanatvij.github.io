@@ -102,9 +102,12 @@ function parallax() {
 
 /* ---------- Lenis smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync ---------- */
 function smoothScroll() {
+  // Light touch: a short ease-out (0.5 s, quartic) so the page follows the wheel almost immediately.
+  // `?lenis=old` restores the previous heavy setting (lerp 0.1) so the two can be compared by feel.
+  const legacy = new URLSearchParams(location.search).get('lenis') === 'old';
   const lenis = new Lenis({
     autoRaf: false,
-    lerp: 0.1,
+    ...(legacy ? { lerp: 0.1 } : { duration: 0.5, easing: (t: number) => 1 - Math.pow(1 - t, 4) }),
     smoothWheel: true,
     anchors: { offset: -80 },        // sticky header; also covers the skip link (#main)
     stopInertiaOnNavigate: true,

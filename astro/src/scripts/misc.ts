@@ -11,11 +11,24 @@ function initSkillTips() {
     e.stopPropagation();
     const open = !s.classList.contains('is-open');
     close(s);
+    place(s);
     s.classList.toggle('is-open', open);
     (e.currentTarget as HTMLElement).setAttribute('aria-expanded', String(open));
   }));
   document.addEventListener('click', () => close());
+  // Keep the bubble inside the viewport: measure it at its natural spot and shift it sideways by --tip-x.
+  const place = (s: HTMLElement) => {
+    const tip = s.querySelector<HTMLElement>('.skill-tip')!;
+    tip.style.setProperty('--tip-x', '0px');
+    const box = tip.getBoundingClientRect();
+    const margin = 12;
+    let dx = 0;
+    if (box.right > window.innerWidth - margin) dx = window.innerWidth - margin - box.right;
+    if (box.left + dx < margin) dx = margin - box.left;
+    tip.style.setProperty('--tip-x', `${dx}px`);
+  };
   skills.forEach((s) => {
+    (['pointerenter', 'focusin'] as const).forEach((type) => s.addEventListener(type, () => place(s)));
     const undismiss = () => s.classList.remove('is-dismissed');
     s.addEventListener('pointerleave', undismiss);
     s.addEventListener('focusout', undismiss);

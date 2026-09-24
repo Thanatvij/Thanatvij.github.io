@@ -38,3 +38,19 @@ test('home: featured TutorHub card links straight to the live demo', async ({ pa
   await expect(a).toHaveAttribute('target', '_blank');
   await expect(a).toHaveAttribute('rel', /noopener/);
 });
+
+test('personal-projects: TutorHub embed points at the live site and the CSP allows it', async ({ page }) => {
+  await page.goto('/personal-projects/');
+  await expect(page.locator('iframe[title^="TutorHub"]')).toHaveAttribute('src', 'https://thanatvij.github.io/TutorHub/');
+  const csp = await page.locator('meta[http-equiv="Content-Security-Policy"]').getAttribute('content');
+  expect(csp).toMatch(/frame-src[^;]*https:\/\/thanatvij\.github\.io/);
+});
+
+test('the TutorHub links are all the live-site URL', async ({ page }) => {
+  for (const p of ['/', '/personal-projects/']) {
+    await page.goto(p);
+    const hrefs = await page.$$eval('a[href*="TutorHub"]:not([href*="github.com"])', (as) => as.map((a) => (a as HTMLAnchorElement).href));
+    expect(hrefs.length, p).toBeGreaterThan(0);
+    for (const h of hrefs) expect(h).toBe('https://thanatvij.github.io/TutorHub/');
+  }
+});
