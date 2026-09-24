@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Personal Projects — Thanat Vijitrakanlikit</title>
-<meta name="description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub และ keyboardTrans ที่ลองใช้ได้จริง, Tarot Web App, ABYSS และ PTT Élan Café">
+<meta name="description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub, keyboardTrans และ Tarot Web App ที่ลองเล่นได้จริง, ABYSS และ PTT Élan Café">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f5f3ee">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Thanat Vijitrakanlikit">
 <meta property="og:title" content="Personal Projects — Thanat Vijitrakanlikit">
-<meta property="og:description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub และ keyboardTrans ที่ลองใช้ได้จริง, Tarot Web App, ABYSS และ PTT Élan Café">
+<meta property="og:description" content="โปรเจกต์ส่วนตัวและผลงานพัฒนาซอฟต์แวร์ของ Thanat Vijitrakanlikit: TutorHub, keyboardTrans และ Tarot Web App ที่ลองเล่นได้จริง, ABYSS และ PTT Élan Café">
 <meta property="og:url" content="https://thanatvij.github.io/personal-projects/">
 <meta property="og:image" content="https://thanatvij.github.io/assets/img/og-cover.jpg">
 <meta property="og:image:width" content="1200">
@@ -135,7 +135,38 @@
     </div>
   </section>
 
-  <section class="section" aria-labelledby="more-title">
+  <section class="section" id="tarot" aria-labelledby="tarot-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Playable demo</p>
+          <h2 class="h2" id="tarot-title"><span class="th">พยากรณ์แห่งดวงดาว</span></h2>
+        </div>
+        <p class="lead">เว็บดูดวงไพ่ทาโรต์ภาษาไทยที่มีไพ่ครบ 78 ใบ ระบบไพ่กลับหัว Responsive Card Fan และสารานุกรมความหมายไพ่</p>
+      </div>
+      <article class="card card--wide reveal">
+        <div class="card-media"><img src="../assets/img/tarot-live.webp" alt="หน้าจอเลือกไพ่แบบพัดของเว็บไซต์พยากรณ์แห่งดวงดาว" width="1600" height="898" srcset="../assets/img/tarot-live-800.webp 800w, ../assets/img/tarot-live.webp 1600w" sizes="(min-width: 720px) 55vw, 100vw" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta"><span class="status status--personal">Published web app</span><span class="label">Personal · 2025</span></div>
+          <h3>Tarot Web App</h3>
+          <p>ออกแบบ interaction ของสำรับไพ่ด้วย HTML5 Canvas และ CSS animation รองรับการสุ่มไพ่หลายรูปแบบ ไพ่กลับหัว และการใช้งานบนหน้าจอทุกขนาด</p>
+          <ul class="tags"><li>Vanilla JS</li><li>HTML5 Canvas</li><li>Tailwind CSS</li></ul>
+          <div class="card-links">
+            <a class="link-arrow" href="../tarot/"><span>Open full screen</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="link-arrow" href="https://github.com/Thanatvij/tarot" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span class="sr-only"> (เปิดในแท็บใหม่)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <div class="live-embed tarot-embed mt-2 reveal">
+        <div class="embed-bar"><span>ลองเล่นได้เลย — พยากรณ์แห่งดวงดาว</span><a href="../tarot/">Open full screen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        <iframe src="../tarot/?embedded=1" title="พยากรณ์แห่งดวงดาว — Tarot Web App (เดโมที่ลองเล่นได้)" loading="lazy" width="1200" height="760"></iframe>
+      </div>
+      <noscript><p class="mt-1">เดโมนี้ต้องใช้ JavaScript — <a class="link" href="../tarot/">เปิดเว็บแอปแบบเต็มหน้าจอ</a></p></noscript>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="more-title">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
@@ -167,19 +198,6 @@
           </div>
         </article>
 
-        <article class="card card--wide reveal">
-          <div class="card-media"><img data-parallax="0.09" data-parallax-max="24" src="../assets/img/tarot-live.webp" alt="หน้าจอเลือกไพ่แบบพัดของเว็บไซต์พยากรณ์แห่งดวงดาว" width="1600" height="898" srcset="../assets/img/tarot-live-800.webp 800w, ../assets/img/tarot-live.webp 1600w" sizes="(min-width: 720px) 55vw, 100vw" loading="lazy" decoding="async"></div>
-          <div class="card-body">
-            <div class="card-meta"><span class="status status--personal">Published web app</span><span class="label">Web app · 2025</span></div>
-            <h3>Tarot Web App</h3>
-            <p>เว็บดูดวงไพ่ทาโรต์ภาษาไทยชื่อ “พยากรณ์แห่งดวงดาว” มีไพ่ครบ 78 ใบ ระบบไพ่กลับหัว Responsive Card Fan ที่วาดด้วย HTML5 Canvas และสารานุกรมความหมายไพ่</p>
-            <ul class="tags"><li>Vanilla JS</li><li>HTML5 Canvas</li><li>Tailwind CSS</li></ul>
-            <div class="card-links">
-              <a class="link-arrow" href="../tarot/"><span>Open the app</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-              <a class="link-arrow" href="https://github.com/Thanatvij/tarot" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span class="sr-only"> (เปิดในแท็บใหม่)</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-            </div>
-          </div>
-        </article>
 
       </div>
     </div>

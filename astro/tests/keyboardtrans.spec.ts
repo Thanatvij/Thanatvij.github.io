@@ -64,11 +64,23 @@ test.describe('keyboardTrans widget on /personal-projects/', () => {
     await expect(page.locator('#kt-copy')).toBeDisabled();
   });
 
-  test('is featured; Tarot is a regular card in "More builds"', async ({ page }) => {
+  test('/personal-projects/ has three playable demos: keyboardTrans (native), TutorHub and Tarot (iframes)', async ({ page }) => {
     await page.goto('/personal-projects/');
-    await expect(page.locator('#keyboardtrans')).toBeVisible();
-    await expect(page.locator('#tarot')).toHaveCount(0);
-    await expect(page.locator('section[aria-labelledby="more-title"] h3', { hasText: 'Tarot Web App' })).toHaveCount(1);
-    await expect(page.locator('iframe[src*="tarot"]')).toHaveCount(0);
+    await expect(page.locator('#keyboardtrans .kt')).toBeVisible();
+    await expect(page.locator('iframe[title^="TutorHub"]')).toHaveCount(1);
+    await expect(page.locator('#tarot iframe[src*="tarot/"]')).toHaveCount(1);
+    await expect(page.locator('#tarot .embed-bar a', { hasText: 'Open full screen' })).toHaveAttribute('href', '../tarot/');
+    await expect(page.locator('iframe')).toHaveCount(2);
+    // the Tarot card is not repeated in "More builds"
+    await expect(page.locator('section[aria-labelledby="more-title"] h3', { hasText: 'Tarot' })).toHaveCount(0);
+  });
+
+  test('the Tarot demo actually plays: its start button advances the reading', async ({ page }) => {
+    await page.goto('/personal-projects/');
+    await page.locator('#tarot iframe').scrollIntoViewIfNeeded();
+    const frame = page.frameLocator('#tarot iframe');
+    await expect(frame.locator('button', { hasText: 'เริ่มเปิดไพ่' })).toBeVisible({ timeout: 10_000 });
+    await frame.locator('button', { hasText: 'เริ่มเปิดไพ่' }).click();
+    await expect(frame.locator('#btnStartDraw, .category-card, .category-grid').first()).toBeVisible({ timeout: 10_000 });
   });
 });

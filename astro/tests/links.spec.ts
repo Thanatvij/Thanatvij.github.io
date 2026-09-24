@@ -54,3 +54,16 @@ test('the TutorHub links are all the live-site URL', async ({ page }) => {
     for (const h of hrefs) expect(h).toBe('https://thanatvij.github.io/TutorHub/');
   }
 });
+
+test('every embedded iframe is allowed by that page\'s frame-src', async ({ page }) => {
+  await page.goto('/personal-projects/');
+  const csp = (await page.locator('meta[http-equiv="Content-Security-Policy"]').getAttribute('content'))!;
+  const frameSrc = csp.split(';').map((d) => d.trim()).find((d) => d.startsWith('frame-src'))!;
+  const srcs = await page.$$eval('iframe', (fs) => fs.map((f) => (f as HTMLIFrameElement).src));
+  expect(srcs.length).toBe(2);
+  for (const src of srcs) {
+    const origin = new URL(src).origin;
+    const ok = (origin === new URL(page.url()).origin && frameSrc.includes("'self'")) || frameSrc.includes(origin);
+    expect(ok, src).toBe(true);
+  }
+});
