@@ -1,0 +1,12 @@
+---
+/** Eyebrow + two-tone heading on the left, lead paragraph (or the "aside" slot) on the right. */
+interface Props { id: string; eyebrow: string; titleStart: string; titleEmphasis: string; lead?: string }
+const { id, eyebrow, titleStart, titleEmphasis, lead } = Astro.props;
+---
+<div class="section-head reveal">
+  <div>
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 class="h2" id={id}>{titleStart} <em>{titleEmphasis}</em></h2>
+  </div>
+  <slot name="aside">{lead && <p class="lead">{lead}</p>}</slot>
+</div>

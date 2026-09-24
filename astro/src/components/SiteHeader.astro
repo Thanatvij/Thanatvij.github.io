@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { linkAttrs } from '../utils/links';
+
+interface Props { current?: string }
+const { current } = Astro.props;
+const site = (await getEntry('site', 'site'))!.data;
+---
+<a class="skip-link" href="#main">{site.skipLink}</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label={site.homeLabel}><span class="brand-mark" aria-hidden="true">{site.brandMark}</span><span class="brand-name">{site.name}</span></a>
+    <nav class="site-nav" id="site-nav" aria-label={site.navLabel}>
+      <ul>
+        {site.nav.map((item) => (
+          <li><a href={item.href} aria-current={item.key === current ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+        <li><a class="nav-cta" href={site.resume.href} {...linkAttrs(site.resume)}>{site.resume.label}<span class="sr-only">{site.labels.newTab}</span></a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle data-label-dark={site.labels.themeToDark} data-label-light={site.labels.themeToLight} aria-label={site.labels.themeToDark}><Icon name="moon" class="i-moon" /><Icon name="sun" class="i-sun" /></button>
+      <button class="icon-btn menu-toggle" type="button" data-menu data-label-open={site.labels.menuOpen} data-label-close={site.labels.menuClose} aria-expanded="false" aria-controls="site-nav" aria-label={site.labels.menuOpen}><span class="menu-lines"></span></button>
+    </div>
+  </div>
+</header>

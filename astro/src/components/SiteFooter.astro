@@ -1,0 +1,31 @@
+---
+import { getEntry } from 'astro:content';
+import { linkAttrs } from '../utils/links';
+
+const site = (await getEntry('site', 'site'))!.data;
+const f = site.footer;
+const year = new Date().getFullYear(); // replaced client-side too, so a stale build never shows an old year
+---
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-name">{site.name}</p>
+      <p class="footer-sub">{f.sub}</p>
+    </div>
+    <div class="footer-col">
+      <h2>{f.pagesHeading}</h2>
+      <ul>
+        {f.pages.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>{f.elsewhereHeading}</h2>
+      <ul>
+        {f.elsewhere.map((l) => (
+          <li><a href={l.href} {...linkAttrs(l)}>{l.label}{l.external && <span class="sr-only">{site.labels.newTab}</span>}</a></li>
+        ))}
+      </ul>
+    </div>
+    <p class="footer-legal"><span>© <span data-year>{year}</span> {f.legal}</span><span>{f.legalRight}</span></p>
+  </div>
+</footer>

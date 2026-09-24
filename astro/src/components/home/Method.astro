@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SectionHead from '../SectionHead.astro';
+
+interface Props { data: CollectionEntry<'home'>['data']['method'] }
+const { data } = Astro.props;
+---
+<section class="section section--tint" id="method" aria-labelledby="method-title">
+  <div class="wrap">
+    <SectionHead id="method-title" eyebrow={data.eyebrow} titleStart={data.titleStart} titleEmphasis={data.titleEmphasis} lead={data.lead} />
+    <ol class="pipeline">
+      {data.steps.map((s) => <li class="pipe-step reveal"><h3>{s.title}</h3><p>{s.text}</p><span class="label">{s.label}</span></li>)}
+    </ol>
+    <p class="pipe-foot">{data.foot.text} <a class="link" href={data.foot.linkHref}>{data.foot.linkLabel}</a></p>
+  </div>
+</section>

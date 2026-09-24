@@ -1,0 +1,74 @@
+---
+/**
+ * The one layout every page uses: <head> (SEO, CSP, fonts, favicons), header, <main>, footer, and the
+ * client script bundle. Pages pass only { seo, current }; no copy lives here.
+ */
+import { getEntry } from 'astro:content';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { CSP } from '../config/security';
+import '../styles/global.css';
+
+interface Props {
+  seo: { title: string; description: string; path: string };
+  current?: string;
+  robots?: string;
+}
+const { seo, current, robots } = Astro.props;
+const site = (await getEntry('site', 'site'))!.data;
+const d = site.seoDefaults;
+const canonical = new URL(seo.path, site.url).href;
+const image = new URL(d.image, site.url).href;
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: `${site.url}/`,
+  affiliation: { '@type': 'CollegeOrUniversity', name: site.university },
+  sameAs: [site.contact.github, site.contact.linkedin],
+  knowsAbout: site.knowsAbout,
+};
+const fonts = ['ibm-plex-sans-thai-400-thai', 'ibm-plex-sans-thai-400-latin', 'instrument-serif-400-latin'];
+---
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    {robots && <meta name="robots" content={robots} />}
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content={d.themeColor} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={CSP} />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content={String(d.imageWidth)} />
+    <meta property="og:image:height" content={String(d.imageHeight)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=4" />
+    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg?v=4" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png?v=4" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=4" />
+    <link rel="manifest" href="/manifest.webmanifest?v=4" />
+    {fonts.map((f) => <link rel="preload" href={`/assets/fonts/${f}.woff2`} as="font" type="font/woff2" crossorigin />)}
+    <script is:inline src="/assets/js/theme.js"></script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(person)} />
+  </head>
+  <body>
+    <SiteHeader current={current} />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

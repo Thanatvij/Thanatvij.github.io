@@ -1,0 +1,10 @@
+---
+import { getEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { linkAttrs } from '../utils/links';
+
+interface Props { label: string; href: string; external?: boolean }
+const { label, href, external } = Astro.props;
+const site = (await getEntry('site', 'site'))!.data;
+---
+<a class="link-arrow" href={href} {...linkAttrs({ external })}><span>{label}</span>{external && <span class="sr-only">{site.labels.newTab}</span>}<Icon name="arrow-ur" /></a>

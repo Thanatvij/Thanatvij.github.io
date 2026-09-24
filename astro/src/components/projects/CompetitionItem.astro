@@ -1,0 +1,37 @@
+---
+import { getEntry, type CollectionEntry } from 'astro:content';
+import Icon from '../Icon.astro';
+import { linkAttrs } from '../../utils/links';
+
+type Item = CollectionEntry<'projects'>['data']['list']['items'][number];
+interface Props { item: Item; deckLabel: string }
+const { item: it, deckLabel } = Astro.props;
+const site = (await getEntry('site', 'site'))!.data;
+const newTab = site.labels.newTab;
+const c = it.cover;
+const headingId = `t-${it.id}`;
+---
+<article class:list={['comp', it.flag && 'comp--flagship', 'reveal']} id={it.id} aria-labelledby={headingId}>
+  <div class="comp-cover">
+    <a class="comp-media" href={it.href} data-cursor="view" tabindex="-1" aria-hidden="true">
+      <img src={c.src} alt={c.alt} width={c.width} height={c.height} srcset={c.small ? `${c.small} 800w, ${c.src} ${c.width}w` : undefined} sizes="(min-width: 960px) 50vw, 100vw" loading="lazy" decoding="async" />
+    </a>
+    <p class="deck-cap"><a class="deck-link" href={it.deck.href} target="_blank" rel="noopener noreferrer"><span>{deckLabel}</span><span class="sr-only">{newTab}</span><Icon name="arrow-ur" /><span class="file-size">{it.deck.size}</span></a></p>
+  </div>
+  <div class="comp-body">
+    <div class="comp-head">
+      {it.flag && <span class="flag">{it.flag}</span>}
+      <span class={`status status--${it.status.kind}`}>{it.status.label}</span>
+      <span class="label">{it.ordinal}</span>
+    </div>
+    <h2 id={headingId}>{it.title}{it.titleThai && <> <span class="th">{it.titleThai}</span></>}</h2>
+    <p>{it.description}</p>
+    <dl class="facts">
+      {it.facts.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+    </dl>
+    <ul class="tags">{it.tags.map((t) => <li>{t}</li>)}</ul>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={it.href}>{it.primaryLabel} <Icon name="arrow-ur" /></a><a class="link-arrow" href={it.certificate.href} {...linkAttrs(it.certificate)}><span>{it.certificate.label}</span>{it.certificate.external && <span class="sr-only">{newTab}</span>}<Icon name="arrow-ur" /></a>
+    </div>
+  </div>
+</article>

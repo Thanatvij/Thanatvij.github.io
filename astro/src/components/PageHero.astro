@@ -1,0 +1,16 @@
+---
+/**
+ * Hero used by inner pages (competitions, personal projects, about, contact…):
+ * eyebrow, two-tone <h1>, lead paragraph, and whatever the page puts in the default slot.
+ */
+interface Props { eyebrow: string; titleStart: string; titleEmphasis: string; lead?: string }
+const { eyebrow, titleStart, titleEmphasis, lead } = Astro.props;
+---
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 class="h1">{titleStart} <em>{titleEmphasis}</em></h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</header>

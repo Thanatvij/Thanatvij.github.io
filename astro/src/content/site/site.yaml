@@ -1,0 +1,63 @@
+# Shared by every page: brand, navigation, footer, contact links and UI labels.
+# Edit text here; layout code lives in src/layouts and src/components.
+name: Thanat Vijitrakanlikit
+url: https://thanatvij.github.io
+brandMark: TV
+university: Thammasat University
+skipLink: ข้ามไปเนื้อหาหลัก
+homeLabel: Thanat Vijitrakanlikit — หน้าแรก
+navLabel: เมนูหลัก
+
+nav:
+  - { label: Home, href: /, key: home }
+  - { label: Competitions, href: /projects/, key: projects }
+  - { label: Personal, href: /personal-projects/, key: personal }
+  - { label: About, href: /about/, key: about }
+  - { label: Contact, href: /contact/, key: contact }
+
+resume:
+  label: Resume
+  href: /assets/docs/thanat-vijitrakanlikit-resume.pdf
+  external: true
+
+labels:
+  newTab: " (เปิดในแท็บใหม่)"
+  themeToDark: ใช้ธีมมืด
+  themeToLight: ใช้ธีมสว่าง
+  menuOpen: เปิดเมนู
+  menuClose: ปิดเมนู
+
+contact:
+  email: thanat34423@gmail.com
+  github: https://github.com/Thanatvij
+  linkedin: https://www.linkedin.com/in/thanat34423
+
+footer:
+  sub: Digital Technology and Innovation · Thammasat University, Lampang
+  pagesHeading: Pages
+  elsewhereHeading: Elsewhere
+  pages:
+    - { label: Home, href: / }
+    - { label: Competitions, href: /projects/ }
+    - { label: Personal projects, href: /personal-projects/ }
+    - { label: About, href: /about/ }
+    - { label: Contact, href: /contact/ }
+  elsewhere:
+    - { label: Email, href: "mailto:thanat34423@gmail.com" }
+    - { label: GitHub, href: "https://github.com/Thanatvij", external: true }
+    - { label: LinkedIn, href: "https://www.linkedin.com/in/thanat34423", external: true }
+    - { label: Resume (PDF), href: /assets/docs/thanat-vijitrakanlikit-resume.pdf, external: true }
+  legal: Thanat Vijitrakanlikit
+  legalRight: Static site, hosted on GitHub Pages
+
+seoDefaults:
+  image: /assets/img/og-cover.jpg
+  imageWidth: 1200
+  imageHeight: 630
+  themeColor: "#f5f3ee"
+
+knowsAbout:
+  - Data Science
+  - Machine Learning
+  - Computer Vision
+  - Software development

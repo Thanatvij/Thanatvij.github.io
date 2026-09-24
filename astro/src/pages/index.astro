@@ -1,0 +1,27 @@
+---
+/**
+ * Home page (pilot). This file only assembles sections; all text is in src/content/pages/home.yaml
+ * and all shared chrome (header, footer, <head>) is in src/layouts/BaseLayout.astro.
+ */
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import Flagship from '../components/home/Flagship.astro';
+import StatStrip from '../components/home/StatStrip.astro';
+import WorkList from '../components/home/WorkList.astro';
+import Method from '../components/home/Method.astro';
+import PersonalTeaser from '../components/home/PersonalTeaser.astro';
+import Toolbox from '../components/home/Toolbox.astro';
+import Cta from '../components/home/Cta.astro';
+
+const home = (await getEntry('home', 'home'))!.data;
+---
+<BaseLayout seo={home.seo} current="home">
+  <Hero data={home.hero}><Flagship data={home.flagship} /></Hero>
+  <StatStrip data={home.stats} />
+  <WorkList data={home.work} />
+  <Method data={home.method} />
+  <PersonalTeaser data={home.personal} />
+  <Toolbox data={home.toolbox} />
+  <Cta data={home.cta} />
+</BaseLayout>

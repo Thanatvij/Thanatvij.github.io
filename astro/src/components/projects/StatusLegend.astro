@@ -1,0 +1,8 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { label: string; items: CollectionEntry<'projects'>['data']['hero']['legend'] }
+const { label, items } = Astro.props;
+---
+<div class="legend" role="group" aria-label={label}>
+  {items.map((i) => <span><span class={`status status--${i.kind}`}>{i.label}</span> {i.text}</span>)}
+</div>

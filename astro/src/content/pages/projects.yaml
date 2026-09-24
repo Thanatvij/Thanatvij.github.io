@@ -1,0 +1,184 @@
+# Every word on /projects/ (the competitions list). Edit text here only; components never contain copy.
+# Lists are written in block style on purpose: in { a: b, c: d } style a comma ends the value.
+
+seo:
+  title: Competition Projects — Thanat Vijitrakanlikit
+  description: "ผลงานการแข่งขันด้าน Healthcare AI, Data และ Product Pitch ของ Thanat Vijitrakanlikit: BloodScope (NSC 2026 รอบชิงชนะเลิศ), PakD, NutriMatch และ TDET-Scan"
+  path: /projects/
+
+hero:
+  eyebrow: Competition portfolio · 2025—2026
+  titleStart: National competitions and
+  titleEmphasis: research pitches.
+  lead: รวมผลงานจาก NSC, CP CUP และ KU MedAI โดยระบุสถานะตามจริงว่าเป็นระบบที่พัฒนาและทดสอบแล้ว หรือเป็นแนวคิดสำหรับการนำเสนอ
+  legendLabel: ความหมายของสถานะ
+  legend:
+    - kind: built
+      label: Built & tested
+      text: พัฒนาและทดสอบแล้ว
+    - kind: concept
+      label: Concept & pitch
+      text: แนวคิดสำหรับการนำเสนอ
+  more:
+    label: Looking for personal projects?
+    href: /personal-projects/
+
+list:
+  ariaLabel: โครงการแข่งขัน
+  deckLabel: View full deck
+  items:
+    - id: bloodscope
+      flag: Flagship project
+      status:
+        kind: built
+        label: Built & tested
+      ordinal: 01 · NSC 2026
+      title: BloodScope
+      description: ระบบ On-device AI สำหรับจำแนกเม็ดเลือดขาว 13 ชนิดจากภาพกล้องจุลทรรศน์ พัฒนาแอป Flutter และนำโมเดล CoreML ไปทดสอบกับภาพจากโรงพยาบาลจริง ผ่านเข้าสู่รอบชิงชนะเลิศระดับประเทศ
+      facts:
+        - label: My role
+          value: Team Leader & Machine Learning Engineer · 3 developers
+        - label: Event
+          value: NSC 2026 · Health, disability & elderly care
+        - label: Result
+          value: National Finalist
+        - label: Timeline
+          value: Feb—Aug 2026
+      tags:
+        - 17,767 images
+        - 86.04% mAP50
+        - YOLO26n
+        - Flutter + CoreML
+      cover:
+        src: /assets/img/bloodscope-slide.webp
+        small: /assets/img/bloodscope-slide-800.webp
+        alt: ""
+        width: 1600
+        height: 900
+      href: /projects/bloodscope/
+      primaryLabel: Full case study
+      deck:
+        href: /assets/docs/BloodScopeSlide.pdf
+        size: PDF · 99 MB
+      certificate:
+        label: Finalist certificate
+        href: /assets/docs/bloodscope-nsc2026-finalist.pdf
+        external: true
+
+    - id: pakd
+      status:
+        kind: built
+        label: Built prototype
+      ordinal: 02 · NSC 2025
+      title: PakD
+      titleThai: — ปากดี
+      description: แอปประเมินโรคในช่องปากเบื้องต้นแบบเรียลไทม์ เปรียบเทียบ 3 โมเดลและพัฒนาแอป Flutter ได้รับทุนสนับสนุนการพัฒนาในรอบภูมิภาค
+      facts:
+        - label: My role
+          value: Team Leader & Machine Learning Engineer · 3 developers
+        - label: Event
+          value: NSC 2025 · Health, disability & elderly care
+        - label: Result
+          value: Regional funding
+        - label: Timeline
+          value: Feb—Aug 2025
+      tags:
+        - EfficientNetV2-S
+        - Macro F1 0.7629
+        - On-device AI
+      cover:
+        src: /assets/img/pakd-slide.webp
+        small: /assets/img/pakd-slide-800.webp
+        alt: ""
+        width: 1600
+        height: 900
+      href: /projects/pakd/
+      primaryLabel: Full case study
+      deck:
+        href: /assets/docs/Slide_NSC_PakD-2.pdf
+        size: PDF · 5 MB
+      certificate:
+        label: Funding certificate
+        href: /assets/docs/cert-nsc2025.pdf
+        external: true
+
+    - id: nutrimatch
+      status:
+        kind: concept
+        label: Concept & pitch
+      ordinal: 03 · CP CUP 2025
+      title: NutriMatch
+      description: แนวคิด AI Nutritionist สำหรับวางแผนอาหารเฉพาะบุคคล เน้นการวิเคราะห์ข้อมูลสุขภาพ โมเดลธุรกิจ Financial Model และการนำเสนอแนวคิด โดยไม่ได้พัฒนาเป็นซอฟต์แวร์
+      facts:
+        - label: My role
+          value: Data & Business Analyst
+        - label: Event
+          value: CP CUP 2025 · National Round
+        - label: Result
+          value: Certificate of appreciation
+        - label: Timeline
+          value: Aug—Nov 2025
+      tags:
+        - EDA
+        - Business model
+        - Pitching
+      cover:
+        src: /assets/img/nutrimatch-slide.webp
+        small: /assets/img/nutrimatch-slide-800.webp
+        alt: ""
+        width: 1600
+        height: 900
+      href: /projects/nutrimatch/
+      primaryLabel: Project overview
+      deck:
+        href: /assets/docs/nutrimatch-pitch-deck.pdf
+        size: PDF · 5 MB
+      certificate:
+        label: View competition certificate
+        href: /assets/docs/cert-cpcup2025.pdf
+        external: true
+
+    - id: tdet-scan
+      status:
+        kind: concept
+        label: Concept & pitch
+      ordinal: 04 · KU MedAI 2026
+      title: TDET-Scan
+      description: แนวคิดกล้องจุลทรรศน์อัจฉริยะสำหรับคัดกรองความรุนแรงของธาลัสซีเมียและไข้เลือดออก ครอบคลุมการค้นคว้าปัญหา ออกแบบระบบ และต้นแบบหน้าจอ โดยไม่ได้พัฒนาโมเดลหรือแอปจริง
+      facts:
+        - label: My role
+          value: Team Leader & Solution Designer
+        - label: Event
+          value: KU MedAI Innovation Challenge 2026
+        - label: Result
+          value: Presented to a judging panel
+        - label: Timeline
+          value: Feb—Mar 2026
+      tags:
+        - Clinical research
+        - System concept
+        - Figma
+      cover:
+        src: /assets/img/tdet-slide.webp
+        small: /assets/img/tdet-slide-800.webp
+        alt: ""
+        width: 1600
+        height: 900
+      href: /projects/tdet-scan/
+      primaryLabel: Project overview
+      deck:
+        href: /assets/docs/TDET-Slide.pdf
+        size: PDF · 12 MB
+      certificate:
+        label: View competition certificate
+        href: /assets/docs/cert-kumedai2026.pdf
+        external: true
+
+beyond:
+  eyebrow: Beyond competitions
+  titleStart: See what I build
+  titleEmphasis: outside the pitch room.
+  lead: ดูเกม เว็บไซต์ เครื่องมือ และเว็บแอปที่ลองเล่นได้จริง ซึ่งพัฒนานอกเวทีแข่งขัน
+  cta:
+    label: Explore personal projects
+    href: /personal-projects/

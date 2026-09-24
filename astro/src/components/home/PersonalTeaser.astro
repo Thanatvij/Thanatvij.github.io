@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SectionHead from '../SectionHead.astro';
+import ArrowLink from '../ArrowLink.astro';
+import Icon from '../Icon.astro';
+import { getEntry } from 'astro:content';
+import { linkAttrs } from '../../utils/links';
+
+interface Props { data: CollectionEntry<'home'>['data']['personal'] }
+const { data } = Astro.props;
+const c = data.card;
+const site = (await getEntry('site', 'site'))!.data;
+---
+<section class="section" id="personal" aria-labelledby="personal-title">
+  <div class="wrap">
+    <SectionHead id="personal-title" eyebrow={data.eyebrow} titleStart={data.titleStart} titleEmphasis={data.titleEmphasis}>
+      <div slot="aside">
+        <p class="lead">{data.lead}</p>
+        <p class="notice mt-1">{data.notice}</p>
+      </div>
+    </SectionHead>
+    <article class="card card--wide reveal">
+      {c.image && (
+        <div class="card-media">
+          <img src={c.image.src} srcset={c.image.small ? `${c.image.small} 800w, ${c.image.src} ${c.image.width}w` : undefined} sizes="(min-width: 720px) 55vw, 100vw" alt={c.image.alt} width={c.image.width} height={c.image.height} loading="lazy" decoding="async" />
+        </div>
+      )}
+      {c.terminal && (
+        <div class="card-media card-media--terminal">
+          <div class="terminal" role="img" aria-label={c.terminal.ariaLabel}>
+            <div class="bar-dots" aria-hidden="true"><i></i><i></i><i></i><span>{c.terminal.filename}</span></div>
+            <div aria-hidden="true">
+              {c.terminal.lines.map((l) => (
+                <div>{l.prefix && <b>{l.prefix}</b>}{l.prefix && ' '}{l.muted ? <em>{l.text}</em> : l.text}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+      <div class="card-body">
+        <div class="card-meta"><span class="status status--personal">{c.status}</span><span class="label">{c.meta}</span></div>
+        <h3><a class="stretch" href={c.href} {...linkAttrs(c)}>{c.titleThai ? <span class="th">{c.title}</span> : c.title}{c.external && <span class="sr-only">{site.labels.newTab}</span>}</a></h3>
+        <p>{c.description}</p>
+        <ul class="tags">{c.tags.map((t) => <li>{t}</li>)}</ul>
+        <span class="link-arrow"><span>{c.cta}</span><Icon name="arrow-ur" /></span>
+      </div>
+    </article>
+    <p class="more"><ArrowLink label={data.more.label} href={data.more.href} /></p>
+  </div>
+</section>

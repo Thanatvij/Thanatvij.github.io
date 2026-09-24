@@ -1,0 +1,34 @@
+---
+import { getEntry, type CollectionEntry } from 'astro:content';
+import SectionHead from '../SectionHead.astro';
+import ArrowLink from '../ArrowLink.astro';
+import Icon from '../Icon.astro';
+
+interface Props { data: CollectionEntry<'home'>['data']['work'] }
+const { data } = Astro.props;
+const site = (await getEntry('site', 'site'))!.data;
+---
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <SectionHead id="work-title" eyebrow={data.eyebrow} titleStart={data.titleStart} titleEmphasis={data.titleEmphasis} lead={data.lead} />
+    <ol class="work-list">
+      {data.rows.map((row, i) => (
+        <li class="work-row reveal">
+          <span class="work-num mono" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <span class="work-thumb"><img src={row.thumb.src} alt={row.thumb.alt} width={row.thumb.width} height={row.thumb.height} loading="lazy" decoding="async" /></span>
+          <div class="work-main">
+            <h3 class="work-title"><a href={row.href}>{row.title}</a>{row.flagship && <> <span class="flag">{data.flagLabel}</span></>}</h3>
+            <p class="work-desc">{row.description}</p>
+          </div>
+          <div class="work-meta">
+            <span class="work-event">{row.event}</span>
+            <span class={`status status--${row.status.kind}`}>{row.status.label}</span>
+            <a class="deck-link" href={row.deck.href} target="_blank" rel="noopener noreferrer"><span>{data.deckLabel}</span><span class="sr-only">{site.labels.newTab}</span><Icon name="arrow-ur" /><span class="file-size">{row.deck.size}</span></a>
+          </div>
+          <span class="work-arrow" aria-hidden="true"><Icon name="arrow-r" /></span>
+        </li>
+      ))}
+    </ol>
+    <p class="more"><ArrowLink label={data.more.label} href={data.more.href} /></p>
+  </div>
+</section>

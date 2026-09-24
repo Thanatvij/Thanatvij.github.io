@@ -1,0 +1,139 @@
+# Every word on the home page. Edit text here only; components never contain copy.
+# Fields that end in "Emphasis" are shown in the italic accent colour after the plain part of the heading.
+
+seo:
+  title: Thanat Vijitrakanlikit — Data Science & AI/ML
+  description: Portfolio ของ Thanat Vijitrakanlikit นักศึกษาสาขาเทคโนโลยีและนวัตกรรมดิจิทัล มหาวิทยาลัยธรรมศาสตร์ ผู้พัฒนาโครงการด้าน Data Science, AI/ML และ Software — BloodScope ผู้เข้ารอบชิงชนะเลิศ NSC 2026
+  path: /
+
+hero:
+  eyebrow: Data Science · AI/ML · Software
+  titleStart: Data science and machine learning, from
+  titleEmphasis: dataset to device.
+  lead: ผม ธนัช วิจิตราการลิขิต นักศึกษาคณะวิทยาศาสตร์และเทคโนโลยี สาขาวิชาเทคโนโลยีและนวัตกรรมดิจิทัล มหาวิทยาลัยธรรมศาสตร์ ศูนย์ลำปาง สนใจทำงานด้าน Data Science และการพัฒนา AI/ML โดยเน้นการวิเคราะห์ข้อมูล การสร้างโมเดล และการนำผลลัพธ์ไปใช้แก้ปัญหาจริง
+  primary: { label: See BloodScope, href: /projects/bloodscope/ }
+  secondary: { label: Resume · PDF, href: /assets/docs/thanat-vijitrakanlikit-resume.pdf, external: true }
+  note: เปิดรับโอกาสฝึกงานและโครงการด้าน Data / AI / Software
+
+flagship:
+  badge: Flagship project
+  image: { src: /assets/img/bloodscope-poster.webp, alt: "", width: 1600, height: 900 }
+  meta: NSC 2026 · National Finalist · Healthcare AI
+  title: BloodScope
+  description: แอป iOS วิเคราะห์และจำแนกเม็ดเลือดขาว 13 ชนิดด้วย AI ประมวลผลบนอุปกรณ์ ผ่านเข้าสู่ NSC 2026 รอบชิงชนะเลิศระดับประเทศ
+  stats:
+    - label: mAP50
+      value: 86.04%
+    - label: Images
+      value: "17,767"
+    - label: Classes
+      value: "13"
+  link: { label: Read the case study, href: /projects/bloodscope/ }
+
+stats:
+  ariaLabel: ผลงานโดยสรุป
+  items:
+    - { value: "4", label: National competitions }
+    - { value: "3", label: Team lead roles }
+    - { value: "2", label: Funded NSC projects }
+    - { value: "13", label: WBC classes deployed on-device }
+
+work:
+  eyebrow: Competition projects
+  titleStart: Four projects, with
+  titleEmphasis: status stated plainly.
+  lead: รวมผลงานจาก NSC, CP CUP และ KU MedAI โดยระบุสถานะตามจริงว่าเป็นระบบที่พัฒนาและทดสอบแล้ว หรือเป็นแนวคิดสำหรับการนำเสนอ
+  flagLabel: Flagship
+  deckLabel: View full deck
+  rows:
+    - title: BloodScope
+      flagship: true
+      href: /projects/bloodscope/
+      thumb: { src: /assets/img/bloodscope-slide-800.webp, alt: หน้าปกสไลด์โครงการ BloodScope, width: 800, height: 450 }
+      description: แอป iOS จำแนกเม็ดเลือดขาว 13 ชนิดด้วย AI ประมวลผลบนอุปกรณ์ ผ่านเข้ารอบชิงชนะเลิศระดับประเทศ
+      event: NSC 2026
+      status: { kind: built, label: Built & tested }
+      deck: { href: /assets/docs/BloodScopeSlide.pdf, size: PDF · 99 MB }
+    - title: PakD — ปากดี
+      href: /projects/pakd/
+      thumb: { src: /assets/img/pakd-slide-800.webp, alt: หน้าปกสไลด์โครงการ PakD, width: 800, height: 450 }
+      description: แอปประเมินโรคในช่องปากเบื้องต้นแบบเรียลไทม์ เปรียบเทียบ 3 โมเดลและพัฒนาแอป Flutter ได้รับทุนสนับสนุนในรอบภูมิภาค
+      event: NSC 2025
+      status: { kind: built, label: Built prototype }
+      deck: { href: /assets/docs/Slide_NSC_PakD-2.pdf, size: PDF · 5 MB }
+    - title: NutriMatch
+      href: /projects/nutrimatch/
+      thumb: { src: /assets/img/nutrimatch-slide-800.webp, alt: หน้าปก Pitch Deck โครงการ NutriMatch, width: 800, height: 450 }
+      description: แนวคิด AI Nutritionist ที่เชื่อมข้อมูลสุขภาพกับแผนอาหาร พร้อม EDA และ financial model โดยไม่ได้พัฒนาเป็นซอฟต์แวร์
+      event: CP CUP 2025
+      status: { kind: concept, label: Concept & pitch }
+      deck: { href: /assets/docs/nutrimatch-pitch-deck.pdf, size: PDF · 5 MB }
+    - title: TDET-Scan
+      href: /projects/tdet-scan/
+      thumb: { src: /assets/img/tdet-slide-800.webp, alt: หน้าปกสไลด์แนวคิด TDET-Scan, width: 800, height: 450 }
+      description: แนวคิดกล้องจุลทรรศน์อัจฉริยะสำหรับคัดกรองความรุนแรงของธาลัสซีเมียและไข้เลือดออก โดยไม่ได้พัฒนาโมเดลหรือแอปจริง
+      event: KU MedAI 2026
+      status: { kind: concept, label: Concept & pitch }
+      deck: { href: /assets/docs/TDET-Slide.pdf, size: PDF · 12 MB }
+  more: { label: "All competition projects, roles and evidence", href: /projects/ }
+
+method:
+  eyebrow: How the flagship was built
+  titleStart: From raw images to
+  titleEmphasis: a model on the phone.
+  lead: ตัวอย่างขั้นตอนการทำงานจากโครงการ BloodScope ตั้งแต่ข้อมูลดิบจนถึงแอปบนอุปกรณ์จริง
+  steps:
+    - title: Data
+      text: รวบรวมภาพจาก 4 แหล่ง แล้ว re-annotate ให้ตรงกันเป็น 13 คลาส
+      label: 17,767 images
+    - title: Model
+      text: ฝึกโมเดล YOLO26n ด้วย degradation augmentation, repeat-factor sampling และ Equalized Quality Focal Loss
+      label: YOLO26n
+    - title: Evaluate
+      text: ทดสอบบนชุดทดสอบ 13 คลาส และบนภาพจริงจากโรงพยาบาล
+      label: 86.04% mAP50 · 80.87% on real images
+    - title: Deploy
+      text: นำโมเดล CoreML ไปใช้ในแอป Flutter บน iPhone ประมวลผลบนอุปกรณ์ ไม่ส่งภาพขึ้น Cloud
+      label: CoreML · Flutter · on-device
+  foot:
+    text: "PakD ใช้แนวทางเดียวกันกับโจทย์อื่น: เปรียบเทียบ 3 โมเดล (EfficientNetV2-S, MobileNetV3, YOLOv12n) แล้วเลือก EfficientNetV2-S ที่ Macro F1 0.7629"
+    linkLabel: อ่านต่อใน PakD case study
+    linkHref: /projects/pakd/
+
+personal:
+  eyebrow: Personal projects
+  titleStart: Built to be used,
+  titleEmphasis: not only presented.
+  lead: ผลงานที่พัฒนานอกการแข่งขัน เพื่อทดลองเทคโนโลยีและสร้างประสบการณ์ที่ผู้ใช้เปิดใช้งานได้จริง
+  notice: Not competition entries
+  card:
+    image: { src: /assets/img/tutorhub-live.webp, small: /assets/img/tutorhub-live-800.webp, alt: หน้าติวเนื้อหา DTI286 ใน TutorHub แสดงสรุปและเนื้อหาเต็มแบบแยกบท, width: 2580, height: 1451 }
+    status: Published web app
+    meta: Personal · 2026
+    title: TutorHub
+    description: แพลตฟอร์มติวสอบที่รวมเนื้อหา แบบฝึกหัด เก็งข้อสอบ คำศัพท์ และการส่งออก PDF ของ DTI286 กับ PB287 ไว้ในเว็บเดียว
+    tags: [Vanilla JS, Content system, GitHub Pages]
+    cta: Try the live demo
+    href: https://thanatvij.github.io/TutorHub/
+    external: true
+  more: { label: All personal projects, href: /personal-projects/ }
+
+toolbox:
+  eyebrow: Toolbox
+  titleStart: Technical depth,
+  titleEmphasis: product thinking.
+  lead: ผมชอบงานที่ต้องทำความเข้าใจปัญหาให้ชัดก่อนลงมือพัฒนา และมองผลลัพธ์ตั้งแต่ข้อมูล โมเดล ไปจนถึงประสบการณ์ของผู้ใช้
+  groups:
+    - { name: Programming, items: [Python, SQL, JavaScript, Java] }
+    - { name: Data & ML, items: [Machine Learning, Computer Vision, EDA, Predictive Modeling, Power BI] }
+    - { name: Deployment & web, items: [Flutter, CoreML, React, Node.js] }
+    - { name: Tools, items: [Git / GitHub, Figma] }
+  more: { label: Full skills list and experience, href: /about/ }
+
+cta:
+  eyebrow: Contact
+  titleStart: Let’s build something
+  titleEmphasis: useful.
+  lead: ยินดีพูดคุยเกี่ยวกับโอกาสฝึกงาน งานด้าน Data Science, Data Analytics และ AI/ML รวมถึงการร่วมพัฒนาโครงการซอฟต์แวร์
+  primary: { label: Send an email, href: "mailto:thanat34423@gmail.com" }
+  secondary: { label: All contact options, href: /contact/ }

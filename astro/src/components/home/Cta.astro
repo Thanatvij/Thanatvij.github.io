@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from '../Icon.astro';
+
+interface Props { data: CollectionEntry<'home'>['data']['cta'] }
+const { data } = Astro.props;
+---
+<section class="section cta" aria-labelledby="cta-title">
+  <div class="wrap">
+    <p class="eyebrow">{data.eyebrow}</p>
+    <h2 class="h2 mt-1" id="cta-title">{data.titleStart} <em>{data.titleEmphasis}</em></h2>
+    <p class="lead">{data.lead}</p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={data.primary.href}>{data.primary.label} <Icon name="arrow-ur" /></a>
+      <a class="btn btn--ghost" href={data.secondary.href}>{data.secondary.label}</a>
+    </div>
+  </div>
+</section>

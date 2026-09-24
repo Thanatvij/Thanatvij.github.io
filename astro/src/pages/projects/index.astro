@@ -1,0 +1,29 @@
+---
+/**
+ * Competitions list. This file only assembles sections; every word is in src/content/pages/projects.yaml.
+ */
+import { getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ArrowLink from '../../components/ArrowLink.astro';
+import StatusLegend from '../../components/projects/StatusLegend.astro';
+import CompetitionItem from '../../components/projects/CompetitionItem.astro';
+import BandCta from '../../components/BandCta.astro';
+
+const page = (await getEntry('projects', 'projects'))!.data;
+const { hero, list, beyond } = page;
+---
+<BaseLayout seo={page.seo} current="projects">
+  <PageHero eyebrow={hero.eyebrow} titleStart={hero.titleStart} titleEmphasis={hero.titleEmphasis} lead={hero.lead}>
+    <StatusLegend label={hero.legendLabel} items={hero.legend} />
+    <p class="mt-2"><ArrowLink label={hero.more.label} href={hero.more.href} /></p>
+  </PageHero>
+
+  <section class="section" aria-label={list.ariaLabel}>
+    <div class="wrap comp-list">
+      {list.items.map((item) => <CompetitionItem item={item} deckLabel={list.deckLabel} />)}
+    </div>
+  </section>
+
+  <BandCta id="beyond-title" eyebrow={beyond.eyebrow} titleStart={beyond.titleStart} titleEmphasis={beyond.titleEmphasis} lead={beyond.lead} cta={beyond.cta} />
+</BaseLayout>

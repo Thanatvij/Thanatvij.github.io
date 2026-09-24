@@ -1,0 +1,25 @@
+---
+import { getEntry, type CollectionEntry } from 'astro:content';
+import Icon from '../Icon.astro';
+import { linkAttrs } from '../../utils/links';
+
+interface Props { data: CollectionEntry<'home'>['data']['hero'] }
+const { data: hero } = Astro.props;
+const site = (await getEntry('site', 'site'))!.data;
+---
+<section class="hero" data-spotlight aria-labelledby="hero-title">
+  <div class="hero-field" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">{hero.eyebrow}</p>
+      <h1 class="h1" id="hero-title">{hero.titleStart} <em>{hero.titleEmphasis}</em></h1>
+      <p class="lead">{hero.lead}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={hero.primary.href}>{hero.primary.label} <Icon name="arrow-ur" /></a>
+        <a class="btn btn--ghost" href={hero.secondary.href} {...linkAttrs(hero.secondary)}>{hero.secondary.label}{hero.secondary.external && <span class="sr-only">{site.labels.newTab}</span>}</a>
+      </div>
+      <p class="hero-note">{hero.note}</p>
+    </div>
+    <slot />
+  </div>
+</section>
