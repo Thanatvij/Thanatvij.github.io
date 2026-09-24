@@ -35,9 +35,11 @@ npm run test:update      # re-record the pixel baselines (only after an intended
 
 | File | Covers |
 | --- | --- |
-| `a11y.spec.ts` | axe-core (WCAG 2.0/2.1/2.2 A+AA, best-practice) on `/` and `/projects/`, light and dark, with and without reduced motion |
+| `a11y.spec.ts` | axe-core (WCAG 2.0/2.1/2.2 A+AA, best-practice) on all nine pages (embedded iframes excluded), light and dark, with and without reduced motion |
 | `links.spec.ts` | every internal link, image, stylesheet, script and same-page anchor resolves; external `_blank` links have `noopener`; the featured TutorHub card points straight at the live demo |
 | `interaction.spec.ts` | skip link, visible focus on every tab stop, keyboard theme toggle + persistence, mobile menu, reduced-motion (nothing hidden, no Lenis), touch (no overflow, tap targets, no pointer effects) |
+| `motion-parity.spec.ts` | every page (Astro and static) gets the same effects: cursor ring, Lenis, scroll reveal, hero spotlight; none of them under reduced motion or on touch |
+| `type-scale.spec.ts` | 1280 / 1440 / 1920 / 2560 px: no horizontal overflow, body and h1 sizes stay bounded |
 | `visual.spec.ts` | full-page pixel diff (1% tolerance) of both pages, desktop + mobile, light + dark, against `tests/__screenshots__/` |
 
 Baselines are Chromium-on-macOS renders; re-record them if you run on another OS. Text changes in the YAML

@@ -64,6 +64,7 @@
     menuButton.setAttribute('aria-expanded', String(open));
     menuButton.setAttribute('aria-label', open ? 'ปิดเมนู' : 'เปิดเมนู');
     inertTargets.forEach(element => { element.inert = open; });
+    document.dispatchEvent(new CustomEvent('portfolio:menu', { detail: { open } }));
   };
   menuButton?.addEventListener('click', () => setMenu(!document.body.classList.contains('nav-open')));
   $$('.site-nav a').forEach(link => link.addEventListener('click', () => setMenu(false)));
@@ -190,6 +191,40 @@
   syncPointerFx();
   finePointer.addEventListener('change', syncPointerFx);
   reduceMotion.addEventListener('change', syncPointerFx);
+
+  /* ---------- Smooth wheel scrolling (Lenis, vendored in assets/js/vendor) ----------
+     Same rules as the Astro build: precise pointer only, never with reduced motion, torn down if either changes. */
+  let lenis = null, lenisFrame = 0, lenisLoading = false;
+  const lenisTick = time => { lenis.raf(time); lenisFrame = requestAnimationFrame(lenisTick); };
+  const onMenuLock = event => { if (lenis) event.detail.open ? lenis.stop() : lenis.start(); };
+  const startLenis = () => {
+    if (lenis || !window.Lenis) return;
+    lenis = new window.Lenis({ autoRaf: false, lerp: 0.1, smoothWheel: true, anchors: { offset: -80 }, stopInertiaOnNavigate: true });
+    lenisFrame = requestAnimationFrame(lenisTick);
+    document.addEventListener('portfolio:menu', onMenuLock);
+  };
+  const stopLenis = () => {
+    if (!lenis) return;
+    cancelAnimationFrame(lenisFrame);
+    document.removeEventListener('portfolio:menu', onMenuLock);
+    lenis.destroy();
+    lenis = null;
+  };
+  const syncLenis = () => {
+    if (!(finePointer.matches && !reduceMotion.matches)) { stopLenis(); return; }
+    if (window.Lenis) { startLenis(); return; }
+    if (lenisLoading) return;
+    lenisLoading = true;
+    const own = document.querySelector('script[src$="assets/js/main.js"]');
+    const script = document.createElement('script');
+    script.src = own ? own.src.replace(/main\.js(\?.*)?$/, 'vendor/lenis.min.js') : '/assets/js/vendor/lenis.min.js';
+    script.onload = () => { lenisLoading = false; if (finePointer.matches && !reduceMotion.matches) startLenis(); };
+    script.onerror = () => { lenisLoading = false; };
+    document.head.appendChild(script);
+  };
+  syncLenis();
+  finePointer.addEventListener('change', syncLenis);
+  reduceMotion.addEventListener('change', syncLenis);
 
   /* ---------- Parallax (small, only while visible; uses the independent `translate` property) ---------- */
   const parallaxItems = $$('[data-parallax]');

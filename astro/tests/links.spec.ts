@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 // Every internal link, asset and #anchor on each built page must resolve (external http(s) links are only checked for shape).
-const pages = ['/', '/projects/'];
+const pages = ['/', '/projects/', '/about/', '/contact/', '/personal-projects/', '/projects/bloodscope/', '/projects/pakd/', '/projects/nutrimatch/', '/projects/tdet-scan/'];
 
 for (const path of pages) {
   test(`internal links resolve: ${path}`, async ({ page, request }) => {

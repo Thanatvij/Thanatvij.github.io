@@ -6,7 +6,8 @@
 interface Props { eyebrow: string; titleStart: string; titleEmphasis: string; lead?: string }
 const { eyebrow, titleStart, titleEmphasis, lead } = Astro.props;
 ---
-<header class="page-hero">
+<header class="page-hero" data-spotlight>
+  <div class="hero-field" aria-hidden="true"></div>
   <div class="wrap">
     <p class="eyebrow">{eyebrow}</p>
     <h1 class="h1">{titleStart} <em>{titleEmphasis}</em></h1>

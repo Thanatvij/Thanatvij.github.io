@@ -59,7 +59,7 @@
   --fs-lead: clamp(1.1rem, 1rem + .45vw, 1.3rem);
   --fs-h3: clamp(1.4rem, 1.15rem + .9vw, 1.9rem);
   --fs-h2: clamp(2.1rem, 1.35rem + 2.9vw, 4rem);
-  --fs-h1: clamp(2.9rem, 1.2rem + 6.3vw, 6.6rem);
+  --fs-h1: clamp(2.9rem, 1.2rem + 5vw, 5.4rem);
 
   /* Space / layout */
   --gutter: clamp(1.25rem, .6rem + 3vw, 3rem);
@@ -115,8 +115,9 @@
     --img-dim: .92; --header-bg: rgba(10, 16, 18, .82);
   }
 }
-@media (min-width: 1800px) { :root { font-size: 112.5%; --max: 1320px; } }
-@media (min-width: 2400px) { :root { font-size: 125%; --max: 1480px; } }
+/* Wider screens get a wider column, not bigger type: scaling the root font here made every heading balloon (a forced-zoom look). */
+@media (min-width: 1800px) { :root { --max: 1360px; } }
+@media (min-width: 2400px) { :root { font-size: 106.25%; --max: 1520px; } }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -292,7 +293,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero-field::after { display: none; background-image: radial-gradient(circle, var(--accent) 1.4px, transparent 1.9px); opacity: .85; -webkit-mask-image: radial-gradient(260px circle at var(--mx) var(--my), #000 0%, transparent 100%); mask-image: radial-gradient(260px circle at var(--mx) var(--my), #000 0%, transparent 100%); }
 .hero-grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: end; }
 .hero-copy > * + * { margin-top: 1.6rem; }
-.hero .h1 { margin-top: 1.4rem; font-size: clamp(2.7rem, 1.2rem + 4.7vw, 5.6rem); }
+.hero .h1 { margin-top: 1.4rem; font-size: clamp(2.7rem, 1.2rem + 4.2vw, 4.9rem); }
 .hero .lead { max-width: 56ch; }
 .hero-note { display: flex; align-items: center; gap: .7rem; color: var(--ink-2); font-size: var(--fs-small); }
 .hero-note::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px var(--ok-soft); flex: none; }
@@ -415,6 +416,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .card-media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface-2); border-bottom: 1px solid var(--line); }
 .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
 .card:hover .card-media img { transform: scale(1.04); }
+.card-media img[data-parallax] { transform: scale(1.12); translate: 0 var(--py, 0px); }
+.card:hover .card-media img[data-parallax] { transform: scale(1.15); }
+[data-parallax] { --py: 0px; }
 .card-body { padding: clamp(1.25rem, 1rem + 1vw, 1.75rem); display: flex; flex-direction: column; gap: .8rem; flex: 1; position: relative; z-index: 2; }
 .card-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; }
 .card-body h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.9rem, 1.5rem + 1.2vw, 2.5rem); line-height: 1.08; }
@@ -456,7 +460,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* ---------- Page hero (inner pages) ---------- */
 .page-hero { position: relative; overflow: clip; padding-block: clamp(3rem, 2rem + 4vw, 6rem) clamp(2.5rem, 4vw, 4rem); border-bottom: 1px solid var(--line); isolation: isolate; }
-.page-hero .h1 { font-size: clamp(2.7rem, 1.2rem + 5.4vw, 5.6rem); margin-top: 1.25rem; max-width: 16ch; }
+.page-hero .h1 { font-size: clamp(2.7rem, 1.2rem + 4.4vw, 4.9rem); margin-top: 1.25rem; max-width: 16ch; }
 .page-hero .lead { margin-top: 1.5rem; }
 .page-hero .btn-row { margin-top: 2rem; }
 .page-hero + .section { padding-top: clamp(2.5rem, 1.5rem + 4vw, 5rem); }
@@ -480,12 +484,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .comp-body .btn-row { margin-top: 1.5rem; gap: .25rem 1.75rem; }
 @media (min-width: 960px) {
   .comp { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
-  .comp--flagship .comp-body h2 { font-size: clamp(3.2rem, 1.4rem + 5vw, 6.4rem); }
+  .comp--flagship .comp-body h2 { font-size: clamp(3.2rem, 1.4rem + 4vw, 5.2rem); }
 }
 
 /* ---------- Case study ---------- */
 .case-hero { position: relative; overflow: clip; padding-block: clamp(3rem, 2rem + 4vw, 6rem) 0; isolation: isolate; }
-.case-hero .h1 { font-size: clamp(3.4rem, 1.2rem + 9vw, 9rem); margin-top: 1.25rem; line-height: .92; }
+.case-hero .h1 { font-size: clamp(3.2rem, 1.2rem + 6.5vw, 6rem); margin-top: 1.25rem; line-height: .92; }
 .case-hero .h1 .th { font-size: .45em; display: block; margin-top: .4em; color: var(--ink-2); font-weight: 500; }
 .case-hero .lead { margin-top: 1.75rem; }
 .case-hero .btn-row { margin-top: 2rem; }
