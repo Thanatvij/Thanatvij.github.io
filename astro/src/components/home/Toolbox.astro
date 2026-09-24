@@ -9,8 +9,16 @@ const { data } = Astro.props;
 <section class="section section--tint" id="toolbox" aria-labelledby="toolbox-title">
   <div class="wrap">
     <SectionHead id="toolbox-title" eyebrow={data.eyebrow} titleStart={data.titleStart} titleEmphasis={data.titleEmphasis} lead={data.lead} />
+    <p class="skill-hint label"><span aria-hidden="true">ⓘ</span> {data.hint}</p>
     <dl class="toolbox reveal">
-      {data.groups.map((g) => <div><dt>{g.name}</dt><dd>{g.items.map((i) => <span>{i}</span>)}</dd></div>)}
+      {data.groups.map((g, gi) => (
+        <div><dt>{g.name}</dt><dd>{g.items.map((i, ii) => (
+          <span class="skill">
+            <button type="button" class="skill-btn" aria-describedby={`tip-${gi}-${ii}`} aria-expanded="false">{i.name}</button>
+            <span class="skill-tip" role="tooltip" id={`tip-${gi}-${ii}`}>{i.tip}</span>
+          </span>
+        ))}</dd></div>
+      ))}
     </dl>
     <p class="more"><ArrowLink label={data.more.label} href={data.more.href} /></p>
   </div>

@@ -113,7 +113,8 @@ const home = defineCollection({
       more: link,
     }),
     toolbox: heading.extend({
-      groups: z.array(z.object({ name: z.string(), items: z.array(z.string()) })),
+      hint: z.string(),
+      groups: z.array(z.object({ name: z.string(), items: z.array(z.object({ name: z.string(), tip: z.string() })) })),
       more: link,
     }),
     cta: heading.extend({ primary: link, secondary: link }),

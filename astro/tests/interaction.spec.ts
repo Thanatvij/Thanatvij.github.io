@@ -95,3 +95,35 @@ test.describe('touch', () => {
     await expect(page.locator('html.lenis')).toHaveCount(0);
   });
 });
+
+test.describe('skill tooltips (home)', () => {
+  test('hover shows the explanation; Escape closes a tapped one', async ({ page }) => {
+    await page.goto('/');
+    const skill = page.locator('.skill').first();
+    const tip = skill.locator('.skill-tip');
+    await expect(tip).toBeHidden();
+    await skill.locator('.skill-btn').hover();
+    await expect(tip).toBeVisible();
+    await page.mouse.move(0, 0);
+    await expect(tip).toBeHidden();
+    await skill.locator('.skill-btn').click();
+    await expect(skill.locator('.skill-btn')).toHaveAttribute('aria-expanded', 'true');
+    await expect(tip).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(tip).toBeHidden();
+  });
+
+  test('keyboard focus shows it and the tag is described by it', async ({ page }) => {
+    await page.goto('/');
+    const btn = page.locator('.skill-btn').nth(2);
+    await btn.focus();
+    const id = await btn.getAttribute('aria-describedby');
+    await expect(page.locator(`#${id}`)).toBeVisible();
+  });
+
+  test('every skill has a tip', async ({ page }) => {
+    await page.goto('/');
+    const empty = await page.$$eval('.skill', (els) => els.filter((e) => !(e.querySelector('.skill-tip')?.textContent || '').trim()).length);
+    expect(empty).toBe(0);
+  });
+});

@@ -123,11 +123,46 @@ toolbox:
   titleStart: Technical depth,
   titleEmphasis: product thinking.
   lead: ผมชอบงานที่ต้องทำความเข้าใจปัญหาให้ชัดก่อนลงมือพัฒนา และมองผลลัพธ์ตั้งแต่ข้อมูล โมเดล ไปจนถึงประสบการณ์ของผู้ใช้
+  hint: แตะ วางเมาส์ หรือกด Tab ที่ทักษะแต่ละอย่างเพื่อดูคำอธิบายแบบเข้าใจง่ายว่าคืออะไร
   groups:
-    - { name: Programming, items: [Python, SQL, JavaScript, Java] }
-    - { name: Data & ML, items: [Machine Learning, Computer Vision, EDA, Predictive Modeling, Power BI] }
-    - { name: Deployment & web, items: [Flutter, CoreML, React, Node.js] }
-    - { name: Tools, items: [Git / GitHub, Figma] }
+    - name: Programming
+      items:
+        - name: Python
+          tip: ภาษาโปรแกรมยอดนิยมสำหรับงานข้อมูลและ AI ใช้เขียนโค้ดเตรียมข้อมูล สร้างโมเดล และทำระบบอัตโนมัติ
+        - name: SQL
+          tip: ภาษาสำหรับสอบถามและจัดการข้อมูลในฐานข้อมูล เช่น ดึงยอดขายของเดือนที่แล้วมาสรุปผล
+        - name: JavaScript
+          tip: ภาษาที่ทำให้หน้าเว็บโต้ตอบได้ เช่น ปุ่มกด เมนู และเครื่องมือที่ทำงานในเบราว์เซอร์
+        - name: Java
+          tip: ภาษาโปรแกรมทั่วไปที่ใช้ในแอปและระบบขนาดใหญ่ เขียนครั้งเดียวรันได้บนหลายระบบ
+    - name: Data & ML
+      items:
+        - name: Machine Learning
+          tip: การให้คอมพิวเตอร์เรียนรู้รูปแบบจากตัวอย่างข้อมูล แล้วนำไปทำนายหรือจำแนกสิ่งใหม่ได้เอง
+        - name: Computer Vision
+          tip: ทำให้คอมพิวเตอร์ “มองเห็น” และเข้าใจภาพ เช่น ระบุชนิดเม็ดเลือดขาวจากภาพถ่ายในโครงการ BloodScope
+        - name: EDA
+          tip: Exploratory Data Analysis คือการสำรวจข้อมูลก่อนสร้างโมเดล เพื่อดูรูปแบบ ความผิดปกติ และความเหมาะสมของข้อมูล
+        - name: Predictive Modeling
+          tip: การสร้างโมเดลที่ใช้ข้อมูลในอดีตคาดการณ์สิ่งที่จะเกิดขึ้น เช่น ประเมินความเสี่ยงหรือแนวโน้ม
+        - name: Power BI
+          tip: เครื่องมือสร้างแดชบอร์ดและกราฟจากข้อมูล ให้คนที่ไม่ใช่สายเทคนิคอ่านสรุปได้ง่าย
+    - name: Deployment & web
+      items:
+        - name: Flutter
+          tip: ชุดเครื่องมือสร้างแอปมือถือ ใช้โค้ดชุดเดียวทำได้ทั้ง iPhone และ Android
+        - name: CoreML
+          tip: เทคโนโลยีของ Apple ที่ให้โมเดล AI ทำงานบนเครื่อง iPhone โดยตรง ไม่ต้องส่งภาพขึ้นอินเทอร์เน็ต
+        - name: React
+          tip: ไลบรารีสำหรับสร้างหน้าเว็บแบบโต้ตอบ แบ่งหน้าจอเป็นส่วนย่อยที่นำกลับมาใช้ซ้ำได้
+        - name: Node.js
+          tip: ทำให้ JavaScript ทำงานฝั่งเซิร์ฟเวอร์ได้ ใช้สร้างระบบหลังบ้านที่หน้าเว็บหรือแอปเรียกใช้
+    - name: Tools
+      items:
+        - name: Git / GitHub
+          tip: ระบบเก็บประวัติการแก้ไขโค้ดและทำงานร่วมกันเป็นทีม ย้อนกลับเวอร์ชันเก่าได้เมื่อจำเป็น
+        - name: Figma
+          tip: เครื่องมือออกแบบหน้าจอและต้นแบบแอป ใช้วางโครงหน้าตาก่อนเริ่มเขียนโค้ด
   more: { label: Full skills list and experience, href: /about/ }
 
 cta:
